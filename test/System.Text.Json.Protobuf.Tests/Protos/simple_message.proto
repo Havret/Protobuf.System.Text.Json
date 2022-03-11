@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+message SimpleMessage {
+  int32 int_32_property = 1;
+  
+  int64 int_64_property = 2;
+}
