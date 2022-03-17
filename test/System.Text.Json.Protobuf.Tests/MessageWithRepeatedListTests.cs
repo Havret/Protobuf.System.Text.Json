@@ -5,19 +5,20 @@ using Xunit;
 
 namespace System.Text.Json.Protobuf.Tests;
 
-public class SimpleMessageTests
+public class MessageWithRepeatedListTests
 {
     [Fact]
-    public void Should_serialize_message_with_primitive_types()
+    public void Should_serialize_message_with_repeated_list()
     {
         // Arrange
-        var msg = new SimpleMessage
+        var msg = new MessageWithRepeatedList
         {
-            Int32Property = 1,
-            Int64Property = 2,
+            Int32List = {1, 2, 3},
+            Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L}
         };
+
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
-        
+
         // Act
         var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
 
@@ -27,23 +28,25 @@ public class SimpleMessageTests
     }
 
     [Fact]
-    public void Should_deserialize_message_with_primitive_types()
+    public void Should_deserialize_message_with_repeated_list()
     {
         // Arrange
-        var msg = new SimpleMessage
+        var msg = new MessageWithRepeatedList
         {
-            Int32Property = 1,
-            Int64Property = 2,
+            Int32List = {1, 2, 3},
+            Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L}
         };
+
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
 
         // Act
         var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SimpleMessage>(serialized, jsonSerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<MessageWithRepeatedList>(serialized, jsonSerializerOptions);
 
         // Assert
         deserialized.ShouldNotBeNull();
-        deserialized.Int32Property.ShouldBe(msg.Int32Property);
-        deserialized.Int64Property.ShouldBe(msg.Int64Property);
+
+        deserialized.Int32List.ShouldBe(msg.Int32List);
+        deserialized.Int64List.ShouldBe(msg.Int64List);
     }
 }

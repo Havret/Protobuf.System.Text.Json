@@ -3,7 +3,7 @@ using Google.Protobuf;
 
 namespace System.Text.Json.Protobuf;
 
-public class ProtobufJsonConverterFactory : JsonConverterFactory
+internal class ProtobufJsonConverterFactory : JsonConverterFactory
 {
     public override bool CanConvert(Type typeToConvert)
     {
