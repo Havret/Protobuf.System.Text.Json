@@ -21,7 +21,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
             {
                 Accessor = fieldDescriptor.Accessor,
                 IsRepeated = fieldDescriptor.IsRepeated,
-                FieldType = GetFieldType(fieldDescriptor.FieldType),
+                FieldType = GetFieldType(fieldDescriptor),
                 JsonName = fieldDescriptor.JsonName,
             };
             _fieldsLookup.Add(fieldDescriptor.JsonName, fieldInfo);
@@ -90,9 +90,9 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         writer.WriteEndObject();
     }
 
-    private Type GetFieldType(FieldType fieldType)
+    private Type GetFieldType(FieldDescriptor fieldType)
     {
-        switch (fieldType)
+        switch (fieldType.FieldType)
         {
             case FieldType.Double:
                 return typeof(double);
@@ -116,6 +116,8 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 return typeof(bool);
             case FieldType.String:
                 return typeof(string);
+            case FieldType.Message:
+                return fieldType.MessageType.ClrType;
             default:
                 throw new ArgumentOutOfRangeException(nameof(fieldType), $"FieldType: '{fieldType}' is not supported.");
         }
