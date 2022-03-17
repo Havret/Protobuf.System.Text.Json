@@ -4,4 +4,6 @@ option csharp_namespace = "System.Text.Json.Protobuf.Tests";
 
 message MessageWithRepeatedList {
   repeated int32 int_32_list = 1;
+
+  repeated int64 int_64_list = 2;
 }
