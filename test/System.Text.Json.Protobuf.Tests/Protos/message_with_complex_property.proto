@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+message MessageWithComplexProperty {
+  NestedMessage nested_message = 1;
+}
+
+message NestedMessage {
+  string property = 1;
+}
