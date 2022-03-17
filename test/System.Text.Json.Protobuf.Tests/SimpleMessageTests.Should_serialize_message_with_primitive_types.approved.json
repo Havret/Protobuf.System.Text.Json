@@ -1,4 +1,16 @@
 ﻿{
+  "doubleProperty": 2.5,
+  "floatProperty": 3.5,
   "int32Property": 1,
-  "int64Property": 2
+  "int64Property": 2,
+  "uint32Property": 3,
+  "uint64Property": 4,
+  "sint32Property": 5,
+  "sint64Property": 6,
+  "fixed32Property": 7,
+  "fixed64Property": 8,
+  "sfixed32Property": 9,
+  "sfixed64Property": 10,
+  "boolProperty": true,
+  "stringProperty": "hello"
 }

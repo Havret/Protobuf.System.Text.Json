@@ -3,7 +3,34 @@ syntax = "proto3";
 option csharp_namespace = "System.Text.Json.Protobuf.Tests";
 
 message SimpleMessage {
-  int32 int_32_property = 1;
+  double double_property = 1;
+
+  float float_property = 2;
+
+  int32 int_32_property = 3;
+
+  int64 int_64_property = 4;
+
+  uint32 uint_32_property = 5;
+
+  uint32 uint_64_property = 6;
+
+  sint32 sint_32_property = 7;
+
+  sint64 sint_64_property = 8;
+
+  fixed32 fixed_32_property = 9;
+
+  fixed64 fixed_64_property = 10;
+
+  sfixed32 sfixed_32_property = 11;
   
-  int64 int_64_property = 2;
+  sfixed64 sfixed_64_property = 12;
+  
+  bool bool_property = 13;
+  
+  string string_property = 14;
+  
+  // TODO: Support bytes property
+  // bytes bytes_property = 15;
 }
