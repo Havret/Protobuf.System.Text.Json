@@ -1,3 +1,4 @@
+using System.Text.Json.Protobuf.InternalConverters;
 using Google.Protobuf.Reflection;
 
 namespace System.Text.Json.Protobuf;

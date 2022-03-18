@@ -3,7 +3,7 @@ using Google.Protobuf;
 using Google.Protobuf.Collections;
 using Google.Protobuf.Reflection;
 
-namespace System.Text.Json.Protobuf;
+namespace System.Text.Json.Protobuf.InternalConverters;
 
 internal class RepeatedFieldConverter<T> : InternalConverter
 {

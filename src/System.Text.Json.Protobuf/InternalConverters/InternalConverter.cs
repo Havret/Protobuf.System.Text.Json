@@ -1,7 +1,7 @@
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 
-namespace System.Text.Json.Protobuf;
+namespace System.Text.Json.Protobuf.InternalConverters;
 
 internal abstract class InternalConverter
 {
