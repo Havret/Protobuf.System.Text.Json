@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.Json.Protobuf.InternalConverters;
 using System.Text.Json.Serialization;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;

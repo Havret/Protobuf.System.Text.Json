@@ -7,6 +7,7 @@ public static class JsonSerializerOptionsExtensions
 {
     public static void AddProtobufSupport(this JsonSerializerOptions options)
     {
+        options.Converters.Add(new TimestampConverter());
         options.Converters.Add(new ProtobufJsonConverterFactory());
     }
 }

@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 
-namespace System.Text.Json.Protobuf;
+namespace System.Text.Json.Protobuf.InternalConverters;
 
 internal class FieldConverter<T> : InternalConverter
 {
