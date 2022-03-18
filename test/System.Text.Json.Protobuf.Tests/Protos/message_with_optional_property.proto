@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+message MessageWithOptionalProperty {
+  optional int32 int_32_property = 1;
+}
