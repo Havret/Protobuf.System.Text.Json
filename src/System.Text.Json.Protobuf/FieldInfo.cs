@@ -9,4 +9,5 @@ internal class FieldInfo
     public bool IsRepeated { get; init; }
     public Type FieldType { get; init; }
     public string JsonName { get; set; }
+    public bool IsOneOf { get; set; }
 }

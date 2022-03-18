@@ -7,29 +7,27 @@ namespace System.Text.Json.Protobuf;
 
 internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessage, new()
 {
-    private readonly List<FieldInfo> _fields = new();
-    private readonly Dictionary<string, FieldInfo> _fieldsLookup = new();
-    
+    private readonly FieldInfo[] _fields;
+    private readonly Dictionary<string, FieldInfo> _fieldsLookup;
+
     public ProtobufConverter()
     {
         var propertyInfo = typeof(T).GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
         var messageDescriptor = (MessageDescriptor) propertyInfo?.GetValue(null, null)!;
 
-        foreach (var fieldDescriptor in messageDescriptor.Fields.InDeclarationOrder())
+        _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor => new FieldInfo
         {
-            var fieldInfo = new FieldInfo
-            {
-                Accessor = fieldDescriptor.Accessor,
-                IsRepeated = fieldDescriptor.IsRepeated,
-                FieldType = GetFieldType(fieldDescriptor),
-                JsonName = fieldDescriptor.JsonName,
-            };
-            _fieldsLookup.Add(fieldDescriptor.JsonName, fieldInfo);
-            _fields.Add(fieldInfo);
-        }
+            Accessor = fieldDescriptor.Accessor,
+            IsRepeated = fieldDescriptor.IsRepeated,
+            FieldType = GetFieldType(fieldDescriptor),
+            JsonName = fieldDescriptor.JsonName,
+            IsOneOf = fieldDescriptor.ContainingOneof != null
+        }).ToArray();
+
+        _fieldsLookup = _fields.ToDictionary(x => x.JsonName, x => x);
     }
 
-    public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var obj = new T();
 
@@ -37,7 +35,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         {
             throw new JsonException($"The JSON value could not be converted to {typeToConvert}.");
         }
-        
+
         // Process all properties.
         while (true)
         {
@@ -63,7 +61,6 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         }
 
         return obj;
-
     }
 
     public override void Write(Utf8JsonWriter writer, T? value, JsonSerializerOptions options)
@@ -78,6 +75,11 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
 
         foreach (var fieldInfo in _fields)
         {
+            if (fieldInfo.IsOneOf && fieldInfo.Accessor.HasValue(value) == false)
+            {
+                continue;
+            }
+
             var obj = fieldInfo.Accessor.GetValue(value);
             if (obj is { } propertyValue)
             {

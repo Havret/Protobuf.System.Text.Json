@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+message MessageWithOneOf {
+  oneof property {
+    int32 int_32_property_value = 1;
+    int64 int_64_property_value = 2;
+  }
+}
