@@ -143,6 +143,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 return typeof(string);
             case FieldType.Message when fieldDescriptor.MessageType.ClrType != null:
                 return fieldDescriptor.MessageType.ClrType;
+            case FieldType.Enum:
             case FieldType.Message:
                 return propertyTypeLookup[fieldDescriptor.PropertyName];
             default:
