@@ -1,0 +1,12 @@
+﻿{
+  "mapIntToString": {
+    "1": "1-value"
+  },
+  "mapStringToComplexType": {
+    "string_key": {
+      "mapStringToInt": {
+        "a": 1
+      }
+    }
+  }
+}
