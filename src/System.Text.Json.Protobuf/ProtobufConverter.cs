@@ -13,7 +13,11 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
 
     public ProtobufConverter(JsonNamingPolicy? namingPolicy, JsonProtobufSerializerOptions options)
     {
-        var propertyInfo = typeof(T).GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
+        var type = typeof(T);
+        
+        var propertyTypeLookup = type.GetProperties().ToDictionary(x => x.Name, x => x.PropertyType);
+
+        var propertyInfo = type.GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
         var messageDescriptor = (MessageDescriptor) propertyInfo?.GetValue(null, null)!;
 
         var convertNameFunc = GetConvertNameFunc(namingPolicy, options.UseProtobufJsonNames);
@@ -22,7 +26,8 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         {
             Accessor = fieldDescriptor.Accessor,
             IsRepeated = fieldDescriptor.IsRepeated,
-            FieldType = GetFieldType(fieldDescriptor),
+            IsMap = fieldDescriptor.IsMap,
+            FieldType = GetFieldType(fieldDescriptor, propertyTypeLookup),
             JsonName = convertNameFunc(fieldDescriptor),
             IsOneOf = fieldDescriptor.ContainingOneof != null
         }).ToArray();
@@ -72,7 +77,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 continue;
             }
 
-            fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo.FieldType, fieldInfo.IsRepeated);
+            fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo);
 
             reader.Read();
             fieldInfo.Converter.Read(ref reader, obj, fieldInfo.FieldType, options, fieldInfo.Accessor);
@@ -102,7 +107,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
             if (obj is { } propertyValue)
             {
                 writer.WritePropertyName(fieldInfo.JsonName);
-                fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo.FieldType, fieldInfo.IsRepeated);
+                fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo);
                 fieldInfo.Converter.Write(writer, propertyValue, options);
             }
         }
@@ -110,9 +115,9 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         writer.WriteEndObject();
     }
 
-    private Type GetFieldType(FieldDescriptor fieldType)
+    private Type GetFieldType(FieldDescriptor fieldDescriptor, Dictionary<string, Type> propertyTypeLookup)
     {
-        switch (fieldType.FieldType)
+        switch (fieldDescriptor.FieldType)
         {
             case FieldType.Double:
                 return typeof(double);
@@ -136,10 +141,12 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 return typeof(bool);
             case FieldType.String:
                 return typeof(string);
+            case FieldType.Message when fieldDescriptor.MessageType.ClrType != null:
+                return fieldDescriptor.MessageType.ClrType;
             case FieldType.Message:
-                return fieldType.MessageType.ClrType;
+                return propertyTypeLookup[fieldDescriptor.PropertyName];
             default:
-                throw new ArgumentOutOfRangeException(nameof(fieldType), $"FieldType: '{fieldType}' is not supported.");
+                throw new ArgumentOutOfRangeException(nameof(fieldDescriptor), $"FieldType: '{fieldDescriptor}' is not supported.");
         }
     }
 }

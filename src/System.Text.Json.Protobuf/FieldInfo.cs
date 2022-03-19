@@ -11,4 +11,5 @@ internal class FieldInfo
     public Type FieldType { get; init; }
     public string JsonName { get; set; }
     public bool IsOneOf { get; set; }
+    public bool IsMap { get; set; }
 }
