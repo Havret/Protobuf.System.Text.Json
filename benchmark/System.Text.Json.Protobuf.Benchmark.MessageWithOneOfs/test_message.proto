@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Benchmark";
+
+message TestMessage {
+  oneof double_property{
+    double double_property_value = 1;
+  }
+  oneof float_property {
+    float float_property_value = 2;
+  }
+
+  oneof int_32_property {
+    int32 int_32_property_value = 3;
+
+  }
+
+  oneof int_64_property {
+    int64 int_64_property_value = 4;
+  }
+
+  oneof uint_32_property {
+    uint32 uint_32_property_value = 5;
+
+  }
+
+  oneof uint_64_property {
+    uint32 uint_64_property_value = 6;
+
+  }
+
+  oneof sint_32_property {
+    sint32 sint_32_property_value = 7;
+  }
+
+  oneof sint_64_property {
+    sint64 sint_64_property_value = 8;
+  }
+
+  oneof fixed_32_property {
+    fixed32 fixed_32_property_value = 9;
+  }
+
+  oneof fixed_64_property {
+    fixed64 fixed_64_property_value = 10;
+  }
+  oneof sfixed_32_property{
+    sfixed32 sfixed_32_property_value = 11;
+  }
+
+  oneof sfixed_64_property {
+    sfixed64 sfixed_64_property_value = 12;
+  }
+
+  oneof bool_property {
+    bool bool_property_value = 13;
+  }
+}
