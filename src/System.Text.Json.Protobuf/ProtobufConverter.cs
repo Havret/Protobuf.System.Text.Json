@@ -11,21 +11,38 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
     private readonly FieldInfo[] _fields;
     private readonly Dictionary<string, FieldInfo> _fieldsLookup;
 
-    public ProtobufConverter()
+    public ProtobufConverter(JsonNamingPolicy? namingPolicy, JsonProtobufSerializerOptions options)
     {
         var propertyInfo = typeof(T).GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
         var messageDescriptor = (MessageDescriptor) propertyInfo?.GetValue(null, null)!;
+
+        var convertNameFunc = GetConvertNameFunc(namingPolicy, options.UseProtobufJsonNames);
 
         _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor => new FieldInfo
         {
             Accessor = fieldDescriptor.Accessor,
             IsRepeated = fieldDescriptor.IsRepeated,
             FieldType = GetFieldType(fieldDescriptor),
-            JsonName = fieldDescriptor.JsonName,
+            JsonName = convertNameFunc(fieldDescriptor),
             IsOneOf = fieldDescriptor.ContainingOneof != null
         }).ToArray();
 
         _fieldsLookup = _fields.ToDictionary(x => x.JsonName, x => x);
+    }
+
+    private static Func<FieldDescriptor, string> GetConvertNameFunc(JsonNamingPolicy? jsonNamingPolicy, bool useProtobufJsonNames)
+    {
+        if (useProtobufJsonNames)
+        {
+            return descriptor => descriptor.JsonName;
+        }
+
+        if (jsonNamingPolicy != null)
+        {
+            return descriptor => jsonNamingPolicy.ConvertName(descriptor.PropertyName);
+        }
+
+        return descriptor => descriptor.PropertyName;
     }
 
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
