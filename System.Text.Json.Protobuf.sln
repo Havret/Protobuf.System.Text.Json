@@ -4,6 +4,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Tests", "test\System.Text.Json.Protobuf.Tests\System.Text.Json.Protobuf.Tests.csproj", "{97FF3953-1E5F-4D06-95A3-1956448C8E6F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{618C7565-3ABA-429E-BCAE-69D7F671AF5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.SimpleMessage", "benchmark\System.Text.Json.Protobuf.Benchmark.SimpleMessage\System.Text.Json.Protobuf.Benchmark.SimpleMessage.csproj", "{DC053104-9F7E-493E-AB1E-2376BB5B3029}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.Shared", "benchmark\System.Text.Json.Protobuf.Benchmark.Shared\System.Text.Json.Protobuf.Benchmark.Shared.csproj", "{055A5060-09B3-4693-91D1-D526A44CD739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.MessageWithOneOfs", "benchmark\System.Text.Json.Protobuf.Benchmark.MessageWithOneOfs\System.Text.Json.Protobuf.Benchmark.MessageWithOneOfs.csproj", "{41D196D1-724E-4607-90E7-9564C7493E39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.MessageWithRepeatedFields", "benchmark\System.Text.Json.Protobuf.Benchmark.MessageWithRepeatedFields\System.Text.Json.Protobuf.Benchmark.MessageWithRepeatedFields.csproj", "{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +28,27 @@ Global
 		{97FF3953-1E5F-4D06-95A3-1956448C8E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97FF3953-1E5F-4D06-95A3-1956448C8E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97FF3953-1E5F-4D06-95A3-1956448C8E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC053104-9F7E-493E-AB1E-2376BB5B3029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC053104-9F7E-493E-AB1E-2376BB5B3029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC053104-9F7E-493E-AB1E-2376BB5B3029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC053104-9F7E-493E-AB1E-2376BB5B3029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055A5060-09B3-4693-91D1-D526A44CD739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055A5060-09B3-4693-91D1-D526A44CD739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055A5060-09B3-4693-91D1-D526A44CD739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055A5060-09B3-4693-91D1-D526A44CD739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D196D1-724E-4607-90E7-9564C7493E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D196D1-724E-4607-90E7-9564C7493E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D196D1-724E-4607-90E7-9564C7493E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D196D1-724E-4607-90E7-9564C7493E39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC053104-9F7E-493E-AB1E-2376BB5B3029} = {618C7565-3ABA-429E-BCAE-69D7F671AF5B}
+		{055A5060-09B3-4693-91D1-D526A44CD739} = {618C7565-3ABA-429E-BCAE-69D7F671AF5B}
+		{41D196D1-724E-4607-90E7-9564C7493E39} = {618C7565-3ABA-429E-BCAE-69D7F671AF5B}
+		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D} = {618C7565-3ABA-429E-BCAE-69D7F671AF5B}
 	EndGlobalSection
 EndGlobal

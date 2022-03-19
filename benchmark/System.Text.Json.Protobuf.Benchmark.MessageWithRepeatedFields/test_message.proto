@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Benchmark";
+
+message TestMessage {
+  
+  repeated double double_property = 1;
+
+  repeated float float_property = 2;
+
+  repeated int32 int_32_property = 3;
+
+  repeated int64 int_64_property = 4;
+
+  repeated uint32 uint_32_property = 5;
+
+  repeated uint64 uint_64_property = 6;
+
+  repeated sint32 sint_32_property = 7;
+
+  repeated sint64 sint_64_property = 8;
+
+  repeated fixed32 fixed_32_property = 9;
+
+  repeated fixed64 fixed_64_property = 10;
+
+  repeated sfixed32 sfixed_32_property = 11;
+
+  repeated sfixed64 sfixed_64_property = 12;
+
+  repeated bool bool_property = 13;
+
+  repeated string string_property = 14;
+}
