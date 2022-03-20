@@ -20,7 +20,7 @@ jobs:
         with:
           dotnet-version: "6.0.x"
       - name: Create NuGet Package
-        run: dotnet pack -c Release /p:Version=${{ github.event.release.name }} /p:PackageReleaseNotes="See https://github.com/Havret/dotnet-activemq-artemis-client/releases/tag/${{ github.event.release.tag_name }}"
+        run: dotnet pack -c Release /p:Version=${{ github.event.release.name }} /p:PackageReleaseNotes="See https://github.com/Havret/Protobuf.System.Text.Json/releases/tag/${{ github.event.release.tag_name }}"
       - name: Archive NuGet Package
         uses: actions/upload-artifact@v1
         with:
