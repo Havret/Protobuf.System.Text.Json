@@ -18,7 +18,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <RootNamespace>System.Text.Json.Protobuf</RootNamespace>
+        <RootNamespace>Protobuf.System.Text.Json</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

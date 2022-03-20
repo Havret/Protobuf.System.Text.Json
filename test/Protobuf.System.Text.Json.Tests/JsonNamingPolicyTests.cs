@@ -1,8 +1,10 @@
-using System.Text.Json.Protobuf.Tests.Utils;
+using System.Text.Json;
+using System.Text.Json.Protobuf.Tests;
+using Protobuf.System.Text.Json.Tests.Utils;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
-namespace System.Text.Json.Protobuf.Tests;
+namespace Protobuf.System.Text.Json.Tests;
 
 public class JsonNamingPolicyTests
 {

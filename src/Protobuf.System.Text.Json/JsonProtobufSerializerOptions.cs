@@ -1,4 +1,4 @@
-namespace System.Text.Json.Protobuf;
+namespace Protobuf.System.Text.Json;
 
 public class JsonProtobufSerializerOptions
 {

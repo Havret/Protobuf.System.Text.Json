@@ -1,9 +1,10 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Google.Protobuf;
 using Google.Protobuf.Collections;
 using Google.Protobuf.Reflection;
 
-namespace System.Text.Json.Protobuf.InternalConverters;
+namespace Protobuf.System.Text.Json.InternalConverters;
 
 internal class MapConverter<TKey, TValue> : InternalConverter
 {

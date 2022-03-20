@@ -1,4 +1,6 @@
-namespace System.Text.Json.Protobuf.Tests.Utils;
+using System.Text.Json;
+
+namespace Protobuf.System.Text.Json.Tests.Utils;
 
 public class TestHelper
 {

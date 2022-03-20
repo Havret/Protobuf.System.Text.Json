@@ -1,8 +1,10 @@
-using System.Text.Json.Protobuf.Benchmark.Shared;
+using System.Text.Json.Protobuf.Benchmark;
 using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
+using Protobuf.System.Text.Json.Benchmark.Shared;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace System.Text.Json.Protobuf.Benchmark.SimpleMessage;
+namespace Protobuf.System.Text.Json.Benchmark.SimpleMessage;
 
 [MarkdownExporter]
 public class Benchmarks

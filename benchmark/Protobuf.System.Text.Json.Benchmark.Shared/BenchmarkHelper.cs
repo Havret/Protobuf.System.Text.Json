@@ -1,6 +1,7 @@
+using System.Text.Json;
 using Newtonsoft.Json;
 
-namespace System.Text.Json.Protobuf.Benchmark.Shared;
+namespace Protobuf.System.Text.Json.Benchmark.Shared;
 
 public static class BenchmarkHelper
 {

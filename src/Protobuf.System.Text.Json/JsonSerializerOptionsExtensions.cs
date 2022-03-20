@@ -1,4 +1,4 @@
-using System.Text.Json.Protobuf;
+using Protobuf.System.Text.Json;
 
 // ReSharper disable once CheckNamespace
 namespace System.Text.Json;

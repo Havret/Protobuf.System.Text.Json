@@ -1,4 +1,4 @@
-namespace System.Text.Json.Protobuf.InternalConverters;
+namespace Protobuf.System.Text.Json.InternalConverters;
 
 internal class InternalConverterFactory
 {

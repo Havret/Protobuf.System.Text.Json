@@ -1,10 +1,11 @@
 using System.Reflection;
-using System.Text.Json.Protobuf.InternalConverters;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
+using Protobuf.System.Text.Json.InternalConverters;
 
-namespace System.Text.Json.Protobuf;
+namespace Protobuf.System.Text.Json;
 
 internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessage, new()
 {
