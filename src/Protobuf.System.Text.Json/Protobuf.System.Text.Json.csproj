@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Summary>System.Text.Json extensions for Protobuf types.</Summary>
+        <Description>System.Text.Json extensions for Protobuf types.</Description>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <PackageProjectUrl>https://github.com/Havret/System.Text.Json.Protobuf</PackageProjectUrl>
+        <PackageId>Protobuf.System.Text.Json</PackageId>
+        <PackageLicenseUrl>https://github.com/Havret/System.Text.Json.Protobuf/blob/main/LICENSE</PackageLicenseUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/Havret/System.Text.Json.Protobuf</RepositoryUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <Authors>Havret</Authors>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <RootNamespace>System.Text.Json.Protobuf</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+        <PackageReference Include="System.Text.Json" Version="6.0.2" />
+    </ItemGroup>
+
+</Project>

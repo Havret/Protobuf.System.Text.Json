@@ -5,6 +5,8 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
+
+        <RootNamespace>System.Text.Json.Protobuf.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\System.Text.Json.Protobuf\System.Text.Json.Protobuf.csproj" />
+      <ProjectReference Include="..\..\src\Protobuf.System.Text.Json\Protobuf.System.Text.Json.csproj" />
     </ItemGroup>
 
     <ItemGroup>

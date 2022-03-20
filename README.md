@@ -1,4 +1,4 @@
-# System.Text.Json.Protobuf
+# Protobuf.System.Text.Json
 
 This library provides support for Protobuf types to [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/).
 

@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf", "src\System.Text.Json.Protobuf\System.Text.Json.Protobuf.csproj", "{AE98589A-143B-41D2-9C20-1C071BA203AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json", "src\Protobuf.System.Text.Json\Protobuf.System.Text.Json.csproj", "{AE98589A-143B-41D2-9C20-1C071BA203AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Tests", "test\System.Text.Json.Protobuf.Tests\System.Text.Json.Protobuf.Tests.csproj", "{97FF3953-1E5F-4D06-95A3-1956448C8E6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json.Tests", "test\Protobuf.System.Text.Json.Tests\Protobuf.System.Text.Json.Tests.csproj", "{97FF3953-1E5F-4D06-95A3-1956448C8E6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{618C7565-3ABA-429E-BCAE-69D7F671AF5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.SimpleMessage", "benchmark\System.Text.Json.Protobuf.Benchmark.SimpleMessage\System.Text.Json.Protobuf.Benchmark.SimpleMessage.csproj", "{DC053104-9F7E-493E-AB1E-2376BB5B3029}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json.Benchmark.SimpleMessage", "benchmark\Protobuf.System.Text.Json.Benchmark.SimpleMessage\Protobuf.System.Text.Json.Benchmark.SimpleMessage.csproj", "{DC053104-9F7E-493E-AB1E-2376BB5B3029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.Shared", "benchmark\System.Text.Json.Protobuf.Benchmark.Shared\System.Text.Json.Protobuf.Benchmark.Shared.csproj", "{055A5060-09B3-4693-91D1-D526A44CD739}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json.Benchmark.Shared", "benchmark\Protobuf.System.Text.Json.Benchmark.Shared\Protobuf.System.Text.Json.Benchmark.Shared.csproj", "{055A5060-09B3-4693-91D1-D526A44CD739}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.MessageWithOneOfs", "benchmark\System.Text.Json.Protobuf.Benchmark.MessageWithOneOfs\System.Text.Json.Protobuf.Benchmark.MessageWithOneOfs.csproj", "{41D196D1-724E-4607-90E7-9564C7493E39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json.Benchmark.MessageWithOneOfs", "benchmark\Protobuf.System.Text.Json.Benchmark.MessageWithOneOfs\Protobuf.System.Text.Json.Benchmark.MessageWithOneOfs.csproj", "{41D196D1-724E-4607-90E7-9564C7493E39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Text.Json.Protobuf.Benchmark.MessageWithRepeatedFields", "benchmark\System.Text.Json.Protobuf.Benchmark.MessageWithRepeatedFields\System.Text.Json.Protobuf.Benchmark.MessageWithRepeatedFields.csproj", "{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json.Benchmark.MessageWithRepeatedFields", "benchmark\Protobuf.System.Text.Json.Benchmark.MessageWithRepeatedFields\Protobuf.System.Text.Json.Benchmark.MessageWithRepeatedFields.csproj", "{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
