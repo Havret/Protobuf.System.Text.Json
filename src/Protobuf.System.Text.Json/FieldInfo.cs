@@ -5,11 +5,11 @@ namespace Protobuf.System.Text.Json;
 
 internal class FieldInfo
 {
-    public IFieldAccessor Accessor { get; init; }
+    public IFieldAccessor Accessor { get; set; } = null!;
     public InternalConverter? Converter { get; set; }
-    public bool IsRepeated { get; init; }
-    public Type FieldType { get; init; }
-    public string JsonName { get; set; }
+    public bool IsRepeated { get; set; }
+    public Type FieldType { get; set; } = null!;
+    public string JsonName { get; set; } = null!;
     public bool IsOneOf { get; set; }
     public bool IsMap { get; set; }
 }

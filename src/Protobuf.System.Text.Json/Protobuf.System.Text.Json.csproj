@@ -3,7 +3,7 @@
     <PropertyGroup>
         <Summary>System.Text.Json extensions for Protobuf types.</Summary>
         <Description>System.Text.Json extensions for Protobuf types.</Description>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net6.0;net5.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>10</LangVersion>
         <PackageProjectUrl>https://github.com/Havret/System.Text.Json.Protobuf</PackageProjectUrl>
         <PackageId>Protobuf.System.Text.Json</PackageId>
@@ -22,8 +22,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Google.Protobuf" Version="3.19.4" />
-        <PackageReference Include="System.Text.Json" Version="6.0.2" />
+        <PackageReference Include="Google.Protobuf" Version="3.19.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+        <PackageReference Include="System.Text.Json" Version="4.6.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+        <PackageReference Include="System.Text.Json" Version="4.6.0" />
     </ItemGroup>
 
 </Project>
