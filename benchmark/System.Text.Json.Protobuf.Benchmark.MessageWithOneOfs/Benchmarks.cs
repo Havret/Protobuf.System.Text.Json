@@ -24,7 +24,7 @@ public class Benchmarks
     };
 
     [Benchmark]
-    public void SystemTextJson()
+    public void SystemTextJsonProtobufSupport()
     {
         var serialized = JsonSerializer.Serialize(_testMessage, BenchmarkHelper.JsonSerializerOptions);
         var _ = JsonSerializer.Deserialize<TestMessage>(serialized, BenchmarkHelper.JsonSerializerOptions);
