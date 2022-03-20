@@ -4,7 +4,7 @@ using Google.Protobuf.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace System.Text.Json.Protobuf.Benchmark;
+namespace System.Text.Json.Protobuf.Benchmark.Shared;
 
 public class NewtonsoftProtobufJsonConverter : JsonConverter
 {

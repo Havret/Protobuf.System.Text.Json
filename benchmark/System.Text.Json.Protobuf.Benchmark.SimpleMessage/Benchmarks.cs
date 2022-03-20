@@ -2,8 +2,9 @@ using System.Text.Json.Protobuf.Benchmark.Shared;
 using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
 
-namespace System.Text.Json.Protobuf.Benchmark;
+namespace System.Text.Json.Protobuf.Benchmark.SimpleMessage;
 
+[MarkdownExporter]
 public class Benchmarks
 {
     private TestMessage _testMessage = new()
@@ -25,7 +26,7 @@ public class Benchmarks
     };
 
     [Benchmark]
-    public void SystemTextJson()
+    public void SystemTextJsonProtobufSupport()
     {
         var serialized = JsonSerializer.Serialize(_testMessage, BenchmarkHelper.JsonSerializerOptions);
         var _ = JsonSerializer.Deserialize<TestMessage>(serialized, BenchmarkHelper.JsonSerializerOptions);
