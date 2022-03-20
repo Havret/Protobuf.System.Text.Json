@@ -1,10 +1,13 @@
-using System.Text.Json.Protobuf.Tests.Utils;
+using System;
+using System.Text.Json;
+using System.Text.Json.Protobuf.Tests;
 using Google.Protobuf.WellKnownTypes;
+using Protobuf.System.Text.Json.Tests.Utils;
 using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
-namespace System.Text.Json.Protobuf.Tests;
+namespace Protobuf.System.Text.Json.Tests;
 
 public class MessageWithTimestampTests
 {

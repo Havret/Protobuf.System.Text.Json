@@ -1,7 +1,8 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Google.Protobuf;
 
-namespace System.Text.Json.Protobuf;
+namespace Protobuf.System.Text.Json;
 
 internal class ProtobufJsonConverterFactory : JsonConverterFactory
 {

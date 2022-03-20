@@ -1,7 +1,7 @@
-using System.Text.Json.Protobuf.InternalConverters;
 using Google.Protobuf.Reflection;
+using Protobuf.System.Text.Json.InternalConverters;
 
-namespace System.Text.Json.Protobuf;
+namespace Protobuf.System.Text.Json;
 
 internal class FieldInfo
 {

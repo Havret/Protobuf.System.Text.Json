@@ -1,7 +1,8 @@
+using System.Text.Json;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 
-namespace System.Text.Json.Protobuf.InternalConverters;
+namespace Protobuf.System.Text.Json.InternalConverters;
 
 internal abstract class InternalConverter
 {
