@@ -5,12 +5,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>System.Text.Json.Protobuf.Benchmark.SimpleMessage</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BenchmarkDotNet" Version="0.13.1"/>
-        <PackageReference Include="Google.Protobuf" Version="3.19.4"/>
-        <PackageReference Include="Google.Protobuf.Tools" Version="3.19.4"/>
+        <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+        <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+        <PackageReference Include="Google.Protobuf.Tools" Version="3.19.4" />
         <PackageReference Include="Grpc.Tools" Version="2.44.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -18,12 +19,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Include="**/*.proto"/>
+        <Protobuf Include="**/*.proto" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\System.Text.Json.Protobuf.Benchmark.Shared\System.Text.Json.Protobuf.Benchmark.Shared.csproj"/>
-        <ProjectReference Include="..\..\src\System.Text.Json.Protobuf\System.Text.Json.Protobuf.csproj"/>
+        <ProjectReference Include="..\Protobuf.System.Text.Json.Benchmark.Shared\Protobuf.System.Text.Json.Benchmark.Shared.csproj" />
+        <ProjectReference Include="..\..\src\Protobuf.System.Text.Json\Protobuf.System.Text.Json.csproj" />
     </ItemGroup>
 
 </Project>

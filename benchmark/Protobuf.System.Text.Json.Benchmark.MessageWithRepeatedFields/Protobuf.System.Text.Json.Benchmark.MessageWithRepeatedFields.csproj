@@ -5,6 +5,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>System.Text.Json.Protobuf.Benchmark.MessageWithRepeatedFields</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,10 +21,10 @@
     <ItemGroup>
         <Protobuf Include="**/*.proto" />
     </ItemGroup>
-
+    
     <ItemGroup>
-        <ProjectReference Include="..\System.Text.Json.Protobuf.Benchmark.Shared\System.Text.Json.Protobuf.Benchmark.Shared.csproj" />
-        <ProjectReference Include="..\..\src\System.Text.Json.Protobuf\System.Text.Json.Protobuf.csproj" />
+        <ProjectReference Include="..\Protobuf.System.Text.Json.Benchmark.Shared\Protobuf.System.Text.Json.Benchmark.Shared.csproj" />
+        <ProjectReference Include="..\..\src\Protobuf.System.Text.Json\Protobuf.System.Text.Json.csproj" />
     </ItemGroup>
 
 </Project>
