@@ -15,12 +15,12 @@ internal class ProtobufJsonConverterFactory : JsonConverterFactory
 
     public override bool CanConvert(Type typeToConvert)
     {
-        return typeToConvert.IsAssignableTo(typeof(IMessage));
+        return typeof(IMessage).IsAssignableFrom(typeToConvert);
     }
 
     public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var converterType = typeof(ProtobufConverter<>).MakeGenericType(typeToConvert);
-        return (JsonConverter) Activator.CreateInstance(converterType, new object[]{options.PropertyNamingPolicy, _options})!;
+        return (JsonConverter) Activator.CreateInstance(converterType, new object[] {options.PropertyNamingPolicy, _options})!;
     }
 }
