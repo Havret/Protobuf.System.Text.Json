@@ -34,3 +34,7 @@ Apple M1 Pro, 1 CPU, 10 logical and 10 physical cores
 |--------------------------------------------- |---------:|--------:|--------:|
 |                SystemTextJsonProtobufSupport | 100.9 μs | 0.19 μs | 0.17 μs |
 | NewtonsoftJsonWithProtobufParserAndFormatter | 735.1 μs | 1.09 μs | 1.02 μs |
+
+## License
+
+This project uses [MIT licence](https://github.com/Havret/Protobuf.System.Text.Json/blob/main/LICENSE). Long story short - you are more than welcome to use it anywhere you like, completely free of charge and without oppressive obligations.
