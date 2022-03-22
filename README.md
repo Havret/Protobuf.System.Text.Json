@@ -9,6 +9,38 @@ By default classes generated from *.proto files don't work particularly well wit
 
 You may try to write a custom JsonConverter that will utilize JsonFormatter and JsonParser from Google.Protobuf package to do all the heavy lifting. Unfortunately, this solution falls short in terms of performance. This library provides high-performance and low-allocating types that serialize Google.Protobuf objects to JavaScript Object Notation (JSON) text and deserialize JSON text to Google.Protobuf objects.
 
+## Quickstart
+
+Add `Protobuf.System.Text.Json` NuGet package to your project using dotnet CLI:
+
+```
+dotnet add package Protobuf.System.Text.Json
+```
+
+To enable Protobuf support you need to register it on `JsonSerializerOptions`:
+
+```csharp
+var jsonSerializerOptions = new JsonSerializerOptions();
+jsonSerializerOptions.PropertyNamingPolicy = new JsonLowerCaseNamingPolicy();
+jsonSerializerOptions.AddProtobufSupport();
+```
+
+You need to pass the options each time you want to serialize:
+
+```csharp
+var msg = new SimpleMessage
+{
+    DoubleProperty = 2.5d
+};
+var payload = JsonSerializer.Serialize(msg, options: jsonSerializerOptions);
+```
+
+or deserialize `Google.Protobuf` objects:
+
+```csharp
+var deserialized = JsonSerializer.Deserialize<SimpleMessage>(payload, jsonSerializerOptions);
+```
+
 ## Performance
 
 ``` ini
