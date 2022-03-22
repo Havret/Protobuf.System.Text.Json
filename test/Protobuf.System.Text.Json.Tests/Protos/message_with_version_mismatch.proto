@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+message MessageWithVersionMismatch {
+  double double_property = 1;
+}
+
+message MessageWithVersionMismatchV2 {
+  double double_property = 1;
+  float float_property = 2;
+}
