@@ -1,5 +1,8 @@
 # Protobuf.System.Text.Json
 
+[![Build](https://github.com/Havret/Protobuf.System.Text.Json/actions/workflows/build.yml/badge.svg)](https://github.com/Havret/Protobuf.System.Text.Json/actions/workflows/build.yml)
+[![NuGet](https://img.shields.io/nuget/vpre/Protobuf.System.Text.Json.svg)](https://www.nuget.org/packages/Protobuf.System.Text.Json/)
+
 This library provides support for Protobuf types to [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/).
 
 ## Performance
