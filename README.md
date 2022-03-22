@@ -5,9 +5,9 @@
 
 This library provides support for [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf) types to [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/).
 
-By default classes generated from `*.proto` files don't work particularly well with `System.Text.Json`. You can properly serialize and deserialize only very simple contracts (only scalar value types work properly). When your schema contains some more advanced structures like repeated fields, maps, oneofs, or optional fields the results are far from acceptable. 
+By default classes generated from *.proto files don't work particularly well with System.Text.Json. You can properly serialize and deserialize only very simple contracts (only scalar value types work properly). When your schema contains some more advanced structures like repeated fields, maps, oneofs, or optional fields the results are far from acceptable. 
 
-You may try to write a custom JsonConverter that will utilize `Google.Protobuf.JsonFormatter` and `Google.Protobuf.JsonParser` to do all the heavy lifting. Unfortunately, this solution falls short in terms of performance. This library provides high-performance and low-allocating types that serialize `Google.Protobuf` objects to JavaScript Object Notation (JSON) text and deserialize JSON text to `Google.Protobuf` objects.
+You may try to write a custom JsonConverter that will utilize JsonFormatter and JsonParser from Google.Protobuf package to do all the heavy lifting. Unfortunately, this solution falls short in terms of performance. This library provides high-performance and low-allocating types that serialize Google.Protobuf objects to JavaScript Object Notation (JSON) text and deserialize JSON text to Google.Protobuf objects.
 
 ## Performance
 
