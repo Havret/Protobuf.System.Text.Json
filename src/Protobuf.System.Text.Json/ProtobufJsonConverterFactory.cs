@@ -18,9 +18,9 @@ internal class ProtobufJsonConverterFactory : JsonConverterFactory
         return typeof(IMessage).IsAssignableFrom(typeToConvert);
     }
 
-    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
     {
         var converterType = typeof(ProtobufConverter<>).MakeGenericType(typeToConvert);
-        return (JsonConverter) Activator.CreateInstance(converterType, new object[] {options.PropertyNamingPolicy, _options})!;
+        return (JsonConverter) Activator.CreateInstance(converterType, new object[] {jsonSerializerOptions, _options})!;
     }
 }

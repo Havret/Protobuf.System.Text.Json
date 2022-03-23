@@ -12,7 +12,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
     private readonly FieldInfo[] _fields;
     private readonly Dictionary<string, FieldInfo> _fieldsLookup;
 
-    public ProtobufConverter(JsonNamingPolicy? namingPolicy, JsonProtobufSerializerOptions options)
+    public ProtobufConverter(JsonSerializerOptions jsonSerializerOptions, JsonProtobufSerializerOptions jsonProtobufSerializerOptions)
     {
         var type = typeof(T);
         
@@ -21,7 +21,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         var propertyInfo = type.GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
         var messageDescriptor = (MessageDescriptor) propertyInfo?.GetValue(null, null)!;
 
-        var convertNameFunc = GetConvertNameFunc(namingPolicy, options.UseProtobufJsonNames);
+        var convertNameFunc = GetConvertNameFunc(jsonSerializerOptions.PropertyNamingPolicy, jsonProtobufSerializerOptions.UseProtobufJsonNames);
 
         _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor => new FieldInfo
         {
@@ -33,7 +33,8 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
             IsOneOf = fieldDescriptor.ContainingOneof != null
         }).ToArray();
 
-        _fieldsLookup = _fields.ToDictionary(x => x.JsonName, x => x);
+        var stringComparer = jsonSerializerOptions.PropertyNameCaseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+        _fieldsLookup = _fields.ToDictionary(x => x.JsonName, x => x, stringComparer);
     }
 
     private static Func<FieldDescriptor, string> GetConvertNameFunc(JsonNamingPolicy? jsonNamingPolicy, bool useProtobufJsonNames)
