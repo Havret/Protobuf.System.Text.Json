@@ -1,0 +1,6 @@
+﻿{
+  "durationProperty": {
+    "seconds": 256,
+    "nanos": 512
+  }
+}

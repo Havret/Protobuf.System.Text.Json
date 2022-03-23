@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 using Google.Protobuf.WellKnownTypes;
 using Type = System.Type;
 
-namespace Protobuf.System.Text.Json;
+namespace Protobuf.System.Text.Json.WellKnownTypesConverters;
 
-public class TimestampConverter : JsonConverter<Timestamp?>
+internal class TimestampConverter : JsonConverter<Timestamp?>
 {
     private JsonConverter<DateTime>? _converter;
 

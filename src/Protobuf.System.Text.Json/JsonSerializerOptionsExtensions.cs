@@ -1,4 +1,5 @@
 using Protobuf.System.Text.Json;
+using Protobuf.System.Text.Json.WellKnownTypesConverters;
 
 // ReSharper disable once CheckNamespace
 namespace System.Text.Json;
@@ -14,6 +15,11 @@ public static class JsonSerializerOptionsExtensions
     {
         var jsonProtobufSerializerOptions = new JsonProtobufSerializerOptions();
         configure.Invoke(jsonProtobufSerializerOptions);
+        if (jsonProtobufSerializerOptions.TreatDurationAsTimeSpan)
+        {
+            options.Converters.Add(new DurationConverter());
+        }
+
         options.Converters.Add(new TimestampConverter());
         options.Converters.Add(new ProtobufJsonConverterFactory(jsonProtobufSerializerOptions));
     }
