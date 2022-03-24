@@ -11,18 +11,29 @@ internal class FieldConverter<T> : InternalConverter
 
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
-        _converter ??= (JsonConverter<T>) options.GetConverter(typeof(T));
+        _converter ??= GetConverter(ref options);
         _converter.Write(writer, (T) value, options);
     }
 
     public override void Read(ref Utf8JsonReader reader, IMessage obj, Type typeToConvert, JsonSerializerOptions options,
         IFieldAccessor fieldAccessor)
     {
-        _converter ??= (JsonConverter<T>) options.GetConverter(typeof(T));
+        _converter ??= GetConverter(ref options);
         var read = _converter.Read(ref reader, typeToConvert, options);
         if (read is { } value)
         {
             fieldAccessor.SetValue(obj, value);
         }
+    }
+    
+    private static JsonConverter<T> GetConverter(ref JsonSerializerOptions options)
+    {
+        var converter = options.GetConverter(typeof(T));
+        if (converter == null)
+        {
+            throw new JsonException($"There is no converter available for type '{typeof(T)}'.");
+        }
+
+        return (JsonConverter<T>) converter;
     }
 }

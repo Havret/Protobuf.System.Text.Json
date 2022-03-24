@@ -12,14 +12,14 @@ internal class RepeatedFieldConverter<T> : InternalConverter
 
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
-        _converter ??= (JsonConverter<IList<T>>) options.GetConverter(typeof(IList<T>));
+        _converter ??= GetConverter(ref options);
         _converter.Write(writer, (IList<T>) value, options);
     }
 
     public override void Read(ref Utf8JsonReader reader, IMessage obj, Type typeToConvert, JsonSerializerOptions options,
         IFieldAccessor fieldAccessor)
     {
-        _converter ??= (JsonConverter<IList<T>>) options.GetConverter(typeof(IList<T>));
+        _converter ??= GetConverter(ref options);
 
         var elements = _converter.Read(ref reader, typeof(IList<T>), options);
         if (elements == null)
@@ -29,5 +29,16 @@ internal class RepeatedFieldConverter<T> : InternalConverter
 
         var value = (RepeatedField<T>)fieldAccessor.GetValue(obj);
         value.AddRange(elements);
+    }
+    
+    private static JsonConverter<IList<T>> GetConverter(ref JsonSerializerOptions options)
+    {
+        var converter = options.GetConverter(typeof(IList<T>));
+        if (converter == null)
+        {
+            throw new JsonException($"There is no converter available for type '{typeof(IList<T>)}'.");
+        }
+
+        return (JsonConverter<IList<T>>) converter;
     }
 }
