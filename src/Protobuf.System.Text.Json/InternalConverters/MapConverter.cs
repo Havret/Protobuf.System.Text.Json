@@ -12,14 +12,14 @@ internal class MapConverter<TKey, TValue> : InternalConverter
 
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
-        _jsonConverter ??= GetConverter(options);
+        _jsonConverter ??= GetConverter(ref options);
         _jsonConverter.Write(writer, (IDictionary<TKey, TValue>) value, options);
     }
 
     public override void Read(ref Utf8JsonReader reader, IMessage obj, Type typeToConvert, JsonSerializerOptions options,
         IFieldAccessor fieldAccessor)
     {
-        _jsonConverter ??= GetConverter(options);
+        _jsonConverter ??= GetConverter(ref options);
 
         var elements = _jsonConverter.Read(ref reader, typeToConvert, options);
         if (elements == null)
@@ -31,9 +31,15 @@ internal class MapConverter<TKey, TValue> : InternalConverter
         value.Add(elements);
     }
 
-    private static JsonConverter<IDictionary<TKey, TValue>> GetConverter(JsonSerializerOptions options)
+    private static JsonConverter<IDictionary<TKey, TValue>> GetConverter(ref JsonSerializerOptions options)
     {
         var dictionaryType = typeof(IDictionary<,>).MakeGenericType(typeof(TKey), typeof(TValue));
-        return (JsonConverter<IDictionary<TKey, TValue>>) options.GetConverter(dictionaryType);
+        var converter = options.GetConverter(dictionaryType);
+        if (converter == null)
+        {
+            throw new JsonException($"There is no converter available for type '{dictionaryType}'.");
+        }
+        
+        return (JsonConverter<IDictionary<TKey, TValue>>) converter;
     }
 }
