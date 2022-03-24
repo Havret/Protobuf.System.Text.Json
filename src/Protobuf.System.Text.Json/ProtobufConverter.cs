@@ -72,10 +72,16 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 break;
             }
 
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                reader.Read();
+                continue;
+            }
+
             var propertyName = reader.GetString();
             reader.Read();
-            
-            if (!_fieldsLookup.TryGetValue(propertyName, out var fieldInfo))
+
+            if (propertyName == null || !_fieldsLookup.TryGetValue(propertyName, out var fieldInfo))
             {
                 continue;
             }

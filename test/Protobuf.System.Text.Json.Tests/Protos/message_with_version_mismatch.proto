@@ -9,4 +9,5 @@ message MessageWithVersionMismatch {
 message MessageWithVersionMismatchV2 {
   double double_property = 1;
   float float_property = 2;
+  repeated int32 repeated_int_32_property = 3;
 }
