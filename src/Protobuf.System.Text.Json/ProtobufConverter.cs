@@ -55,14 +55,19 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         return descriptor => descriptor.PropertyName;
     }
 
-    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        var obj = new T();
-
+        if (reader.TokenType == JsonTokenType.Null)
+        {
+            return null;
+        }
+        
         if (reader.TokenType != JsonTokenType.StartObject)
         {
             throw new JsonException($"The JSON value could not be converted to {typeToConvert}.");
         }
+        
+        var obj = new T();
 
         // Process all properties.
         while (true)
