@@ -19,8 +19,10 @@ public static class JsonSerializerOptionsExtensions
         {
             options.Converters.Add(new DurationConverter());
         }
-
-        options.Converters.Add(new TimestampConverter());
+        if (jsonProtobufSerializerOptions.TreatTimestampAsDateTime)
+        {
+            options.Converters.Add(new TimestampConverter());
+        }
         options.Converters.Add(new ProtobufJsonConverterFactory(jsonProtobufSerializerOptions));
     }
     

@@ -19,4 +19,14 @@ public class JsonProtobufSerializerOptions
     /// The default value is true.
     /// </summary>
     public bool TreatDurationAsTimeSpan { get; set; } = true;
+
+    
+    /// <summary>
+    /// Controls how <see cref="Google.Protobuf.WellKnownTypes.Timestamp"/> fields are handled.
+    /// When set to true, <see cref="Google.Protobuf.WellKnownTypes.Timestamp"/> properties will
+    /// be converted to <see cref="DateTime"/> before serialization and will be expected in the
+    /// same format as <see cref="DateTime"/> during deserialization.
+    /// The default value is true.
+    /// </summary>
+    public bool TreatTimestampAsDateTime { get; set; } = true;
 }
