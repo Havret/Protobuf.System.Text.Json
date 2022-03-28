@@ -11,16 +11,19 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
 {
     private readonly FieldInfo[] _fields;
     private readonly Dictionary<string, FieldInfo> _fieldsLookup;
+    private readonly JsonIgnoreCondition _defaultIgnoreCondition;
 
     public ProtobufConverter(JsonSerializerOptions jsonSerializerOptions, JsonProtobufSerializerOptions jsonProtobufSerializerOptions)
     {
+        _defaultIgnoreCondition = jsonSerializerOptions.DefaultIgnoreCondition;
+        
         var type = typeof(T);
         
         var propertyTypeLookup = type.GetProperties().ToDictionary(x => x.Name, x => x.PropertyType);
 
         var propertyInfo = type.GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
         var messageDescriptor = (MessageDescriptor) propertyInfo?.GetValue(null, null)!;
-
+        
         var convertNameFunc = GetConvertNameFunc(jsonSerializerOptions.PropertyNamingPolicy, jsonProtobufSerializerOptions.UseProtobufJsonNames);
 
         _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor => new FieldInfo
@@ -113,9 +116,17 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
             var obj = fieldInfo.Accessor.GetValue(value);
             if (obj is { } propertyValue)
             {
+                if (_defaultIgnoreCondition is JsonIgnoreCondition.Never or not JsonIgnoreCondition.WhenWritingDefault)
+                {
+                    writer.WritePropertyName(fieldInfo.JsonName);
+                    fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo);
+                    fieldInfo.Converter.Write(writer, propertyValue, options); 
+                }
+            }
+            else if (obj is null && _defaultIgnoreCondition == JsonIgnoreCondition.Never)
+            {
                 writer.WritePropertyName(fieldInfo.JsonName);
-                fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo);
-                fieldInfo.Converter.Write(writer, propertyValue, options);
+                writer.WriteNullValue();
             }
         }
 
