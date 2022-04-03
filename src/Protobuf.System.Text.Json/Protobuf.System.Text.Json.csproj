@@ -17,6 +17,7 @@
         <Authors>Havret</Authors>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <RootNamespace>Protobuf.System.Text.Json</RootNamespace>
     </PropertyGroup>
 
