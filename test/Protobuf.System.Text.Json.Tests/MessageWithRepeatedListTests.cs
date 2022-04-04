@@ -17,7 +17,14 @@ public class MessageWithRepeatedListTests
         {
             Int32List = {1, 2, 3},
             Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L},
-            EnumList = {Corpus.Images, Corpus.News}
+            EnumList = {Corpus.Images, Corpus.News},
+            NestedMessageList =
+            {
+                new NestedField
+                {
+                    Field = 4
+                }
+            }
         };
 
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
@@ -38,7 +45,14 @@ public class MessageWithRepeatedListTests
         {
             Int32List = {1, 2, 3},
             Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L},
-            EnumList = {Corpus.Images, Corpus.News}
+            EnumList = {Corpus.Images, Corpus.News},
+            NestedMessageList =
+            {
+                new NestedField
+                {
+                    Field = 4
+                }
+            }
         };
 
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
@@ -52,5 +66,7 @@ public class MessageWithRepeatedListTests
 
         deserialized.Int32List.ShouldBe(msg.Int32List);
         deserialized.Int64List.ShouldBe(msg.Int64List);
+        deserialized.EnumList.ShouldBe(msg.EnumList);
+        deserialized.NestedMessageList.ShouldBe(msg.NestedMessageList);
     }
 }
