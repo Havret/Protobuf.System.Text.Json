@@ -6,4 +6,16 @@ message MessageWithRepeatedList {
   repeated int32 int_32_list = 1;
 
   repeated int64 int_64_list = 2;
+
+  repeated Corpus enum_list = 3;
+}
+
+enum Corpus {
+  UNIVERSAL = 0;
+  WEB = 1;
+  IMAGES = 2;
+  LOCAL = 3;
+  NEWS = 4;
+  PRODUCTS = 5;
+  VIDEO = 6;
 }

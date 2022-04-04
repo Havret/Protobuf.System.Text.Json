@@ -16,7 +16,8 @@ public class MessageWithRepeatedListTests
         var msg = new MessageWithRepeatedList
         {
             Int32List = {1, 2, 3},
-            Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L}
+            Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L},
+            EnumList = {Corpus.Images, Corpus.News}
         };
 
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
@@ -36,7 +37,8 @@ public class MessageWithRepeatedListTests
         var msg = new MessageWithRepeatedList
         {
             Int32List = {1, 2, 3},
-            Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L}
+            Int64List = {int.MaxValue + 1L, int.MaxValue + 2L, int.MaxValue + 3L},
+            EnumList = {Corpus.Images, Corpus.News}
         };
 
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
