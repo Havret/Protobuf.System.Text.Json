@@ -11,7 +11,7 @@ internal class TimestampConverter : JsonConverter<Timestamp?>
 
     public override Timestamp? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TryGetDateTime(out var dateTime))
+        if (reader.TokenType == JsonTokenType.String && reader.TryGetDateTime(out var dateTime))
         {
             return dateTime.ToTimestamp();
         }

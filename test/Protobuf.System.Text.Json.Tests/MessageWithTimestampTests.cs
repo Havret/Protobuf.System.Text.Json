@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
+using System.Text.Json.Serialization;
 using Google.Protobuf.WellKnownTypes;
 using Protobuf.System.Text.Json.Tests.Utils;
 using Shouldly;
@@ -71,6 +72,23 @@ public class MessageWithTimestampTests
         // Arrange
         var msg = new MessageWithTimestamp();
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
+
+        // Act
+        var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<MessageWithTimestamp>(serialized, jsonSerializerOptions);
+
+        // Assert
+        deserialized.ShouldNotBeNull();
+        deserialized.ShouldBeEquivalentTo(msg);
+    }
+    
+    [Fact]
+    public void Should_serialize_and_deserialize_message_with_timestamp_when_value_is_set_to_null()
+    {
+        // Arrange
+        var msg = new MessageWithTimestamp();
+        var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
+        jsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
 
         // Act
         var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
