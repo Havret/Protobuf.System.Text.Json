@@ -12,5 +12,10 @@
   "enumList": [
     2,
     4
+  ],
+  "nestedMessageList": [
+    {
+      "field": 4
+    }
   ]
 }

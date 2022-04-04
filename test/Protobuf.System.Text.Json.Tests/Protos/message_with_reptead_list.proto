@@ -8,6 +8,8 @@ message MessageWithRepeatedList {
   repeated int64 int_64_list = 2;
 
   repeated Corpus enum_list = 3;
+
+  repeated NestedField nested_message_list = 4;
 }
 
 enum Corpus {
@@ -18,4 +20,8 @@ enum Corpus {
   NEWS = 4;
   PRODUCTS = 5;
   VIDEO = 6;
+}
+
+message NestedField {
+  int32 field = 1;
 }
