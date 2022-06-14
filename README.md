@@ -25,6 +25,16 @@ jsonSerializerOptions.PropertyNamingPolicy = new JsonLowerCaseNamingPolicy();
 jsonSerializerOptions.AddProtobufSupport();
 ```
 
+```csharp
+private class JsonLowerCaseNamingPolicy : JsonNamingPolicy
+{
+  public override string ConvertName(string name)
+  {
+    return name.ToLower();
+  }
+}
+```
+
 You need to pass the options each time you want to serialize:
 
 ```csharp
