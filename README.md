@@ -21,18 +21,8 @@ To enable Protobuf support you need to register it on `JsonSerializerOptions`:
 
 ```csharp
 var jsonSerializerOptions = new JsonSerializerOptions();
-jsonSerializerOptions.PropertyNamingPolicy = new JsonLowerCaseNamingPolicy();
+jsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 jsonSerializerOptions.AddProtobufSupport();
-```
-
-```csharp
-private class JsonLowerCaseNamingPolicy : JsonNamingPolicy
-{
-  public override string ConvertName(string name)
-  {
-    return name.ToLower();
-  }
-}
 ```
 
 You need to pass the options each time you want to serialize:
