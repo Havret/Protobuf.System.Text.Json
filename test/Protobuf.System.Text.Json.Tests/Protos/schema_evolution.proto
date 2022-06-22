@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+message SchemaEvolutionV1 {
+  int32 property_1 = 1;
+}
+
+message SchemaEvolutionV2 {
+  int32 property_1 = 1;
+  repeated int32 property_2 = 2;
+}
