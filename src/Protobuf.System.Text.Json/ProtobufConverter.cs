@@ -90,7 +90,9 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
             
             if (propertyName == null || !_fieldsLookup.TryGetValue(propertyName, out var fieldInfo))
             {
-                reader.Skip();
+                // We need to call TrySkip instead of Skip as Skip may throw exception when called in DeserializeAsync
+                // context https://github.com/dotnet/runtime/issues/39795
+                _ = reader.TrySkip();
                 continue;
             }
 
