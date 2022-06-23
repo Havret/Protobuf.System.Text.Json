@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+import "google/protobuf/wrappers.proto";
+
+message MessageWithWellKnownTypes {
+  google.protobuf.DoubleValue double_value = 1;
+
+  google.protobuf.FloatValue float_value = 2;
+
+  google.protobuf.Int64Value int_64_value = 3;
+
+  google.protobuf.UInt64Value uint_64_value = 4;
+
+  google.protobuf.Int32Value int_32_Value = 5;
+
+  google.protobuf.UInt32Value uint_32_Value = 6;
+
+  google.protobuf.BoolValue bool_value = 7;
+
+  google.protobuf.StringValue string_value = 8;
+}

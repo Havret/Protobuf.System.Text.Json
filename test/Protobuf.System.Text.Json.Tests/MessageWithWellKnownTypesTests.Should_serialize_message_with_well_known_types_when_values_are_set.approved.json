@@ -1,0 +1,10 @@
+﻿{
+  "doubleValue": 1.7976931348623157E+308,
+  "floatValue": 3.4028235E+38,
+  "int64Value": 9223372036854775807,
+  "uint64Value": 18446744073709551615,
+  "int32Value": 2147483647,
+  "uint32Value": 4294967295,
+  "boolValue": true,
+  "stringValue": "some_string_value"
+}

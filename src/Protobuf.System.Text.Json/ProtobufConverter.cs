@@ -3,7 +3,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
+using Google.Protobuf.WellKnownTypes;
 using Protobuf.System.Text.Json.InternalConverters;
+using Type = System.Type;
 
 namespace Protobuf.System.Text.Json;
 
@@ -167,8 +169,24 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 return typeof(bool);
             case FieldType.String:
                 return typeof(string);
-            case FieldType.Message when fieldDescriptor.MessageType.ClrType != null:
-                return fieldDescriptor.MessageType.ClrType;
+            case FieldType.Message when fieldDescriptor.MessageType.ClrType is { } clrType:
+                if (clrType == typeof(DoubleValue))
+                    return typeof(double?);
+                if (clrType == typeof(FloatValue))
+                    return typeof(float?);
+                if (clrType == typeof(Int64Value))
+                    return typeof(long?);
+                if (clrType == typeof(UInt64Value))
+                    return typeof(ulong?);
+                if (clrType == typeof(Int32Value))
+                    return typeof(int?);
+                if (clrType == typeof(UInt32Value))
+                    return typeof(uint?);
+                if (clrType == typeof(BoolValue))
+                    return typeof(bool?);
+                if (clrType == typeof(StringValue))
+                    return typeof(string);
+                return clrType;
             case FieldType.Enum when fieldDescriptor.IsRepeated:
                 var fieldType = propertyTypeLookup[fieldDescriptor.PropertyName];
                 return fieldType.GenericTypeArguments[0];
