@@ -38,7 +38,7 @@ public class ContractEvolutionTests
             DoubleProperty = 1d,
         };
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
-
+        
         // Act
         var payload = JsonSerializer.Serialize(msg, jsonSerializerOptions);
         var deserialized = JsonSerializer.Deserialize<MessageWithVersionMismatchV2>(payload, jsonSerializerOptions);
