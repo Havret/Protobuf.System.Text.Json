@@ -25,12 +25,12 @@ public class NewtonsoftProtobufJsonConverter : JsonConverter
         _jsonFormatter = new JsonFormatter(formatterSettings);
     }
 
-    public override void WriteJson(JsonWriter writer, object? value, Newtonsoft.Json.JsonSerializer serializer)
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
         writer.WriteRawValue(_jsonFormatter.Format((IMessage?) value));
     }
 
-    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, Newtonsoft.Json.JsonSerializer serializer)
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
         return _jsonParser.Parse(JObject.Load(reader).ToString(), ExtractMessageDescriptor(objectType));
     }

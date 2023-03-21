@@ -17,7 +17,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
     public ProtobufConverter(JsonSerializerOptions jsonSerializerOptions, JsonProtobufSerializerOptions jsonProtobufSerializerOptions)
     {
         _defaultIgnoreCondition = jsonSerializerOptions.DefaultIgnoreCondition;
-        
+
         var type = typeof(T);
         
         var propertyTypeLookup = type.GetProperties().ToDictionary(x => x.Name, x => x.PropertyType);
@@ -27,14 +27,20 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         
         var convertNameFunc = GetConvertNameFunc(jsonSerializerOptions.PropertyNamingPolicy, jsonProtobufSerializerOptions.UseProtobufJsonNames);
 
-        _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor => new FieldInfo
+        _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor =>
         {
-            Accessor = fieldDescriptor.Accessor,
-            IsRepeated = fieldDescriptor.IsRepeated,
-            IsMap = fieldDescriptor.IsMap,
-            FieldType = FieldTypeResolver.ResolverFieldType(fieldDescriptor, propertyTypeLookup),
-            JsonName = convertNameFunc(fieldDescriptor),
-            IsOneOf = fieldDescriptor.ContainingOneof != null
+            var fieldInfo = new FieldInfo
+            {
+                Accessor = fieldDescriptor.Accessor,
+                IsRepeated = fieldDescriptor.IsRepeated,
+                EnumType = jsonProtobufSerializerOptions.UseStringProtoEnumValueNames ? fieldDescriptor.EnumType : null,
+                IsMap = fieldDescriptor.IsMap,
+                FieldType = FieldTypeResolver.ResolverFieldType(fieldDescriptor, propertyTypeLookup),
+                JsonName = convertNameFunc(fieldDescriptor),
+                IsOneOf = fieldDescriptor.ContainingOneof != null,
+            };
+            fieldInfo.Converter = InternalConverterFactory.Create(fieldInfo, jsonSerializerOptions);
+            return fieldInfo;
         }).ToArray();
 
         var stringComparer = jsonSerializerOptions.PropertyNameCaseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
@@ -98,7 +104,6 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
             }
 
             reader.Read();
-            fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo);
             fieldInfo.Converter.Read(ref reader, obj, fieldInfo.FieldType, options, fieldInfo.Accessor);
         }
 
@@ -128,7 +133,6 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 if (_defaultIgnoreCondition is JsonIgnoreCondition.Never or not JsonIgnoreCondition.WhenWritingDefault)
                 {
                     writer.WritePropertyName(fieldInfo.JsonName);
-                    fieldInfo.Converter ??= InternalConverterFactory.Create(fieldInfo);
                     fieldInfo.Converter.Write(writer, propertyValue, options); 
                 }
             }

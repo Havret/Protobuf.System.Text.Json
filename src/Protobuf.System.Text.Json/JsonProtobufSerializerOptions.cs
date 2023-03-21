@@ -1,5 +1,8 @@
 namespace Protobuf.System.Text.Json;
 
+/// <summary>
+/// Provides a set of options to configure the behavior of the JSON-Protobuf serialization and deserialization process.
+/// </summary>
 public class JsonProtobufSerializerOptions
 {
     /// <summary>
@@ -20,7 +23,7 @@ public class JsonProtobufSerializerOptions
     /// </summary>
     public bool TreatDurationAsTimeSpan { get; set; } = true;
 
-    
+
     /// <summary>
     /// Controls how <see cref="Google.Protobuf.WellKnownTypes.Timestamp"/> fields are handled.
     /// When set to true, <see cref="Google.Protobuf.WellKnownTypes.Timestamp"/> properties will
@@ -29,4 +32,13 @@ public class JsonProtobufSerializerOptions
     /// The default value is true.
     /// </summary>
     public bool TreatTimestampAsDateTime { get; set; } = true;
+
+    /// <summary>
+    /// Controls how enums defined as part of the protobuf contract are handled.
+    /// When set to true enum values will be serialized as strings based on the naming  
+    /// specified in the .proto file. The same format will be expected during deserialization.
+    /// The default value is false.
+    /// </summary>
+    /// 
+    public bool UseStringProtoEnumValueNames { get; set; }
 }
