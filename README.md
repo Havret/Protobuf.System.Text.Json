@@ -41,6 +41,23 @@ or deserialize `Google.Protobuf` objects:
 var deserialized = JsonSerializer.Deserialize<SimpleMessage>(payload, jsonSerializerOptions);
 ```
 
+## Configuration
+The library offers several configuration options to fine-tune protobuf serialization. You can modify the default settings using a delegate passed to the AddProtobufSupport method. The available options are described below:
+
+### UseProtobufJsonNames
+This option defines how property names should be resolved for protobuf contracts. When set to `true`, the `PropertyNamingPolicy` will be ignored, and property names will be derived from the protobuf contract. The default value is `false`.
+
+### TreatDurationAsTimeSpan
+This option controls how `Google.Protobuf.WellKnownTypes.Duration` fields are handled. When set to true, `Google.Protobuf.WellKnownTypes.Duration` properties will be converted to `TimeSpan` before serialization and will be expected in the same format as `TimeSpan` during deserialization. The default value is `true`.
+
+### TreatTimestampAsDateTime
+This option controls how `Google.Protobuf.WellKnownTypes.Timestamp` fields are handled. When set to true, `Google.Protobuf.WellKnownTypes.Timestamp` properties will be converted to DateTime before serialization and will be expected in the same format as `DateTime` during deserialization. The default value is `true`.`
+
+### UseStringProtoEnumValueNames
+By setting`UseStringProtoEnumValueNames` to `true`, the library will serialize enum values using the names specified in the .proto file and expect the same format during deserialization. The default value is `false`.
+
+By customizing these options, you can control how the library handles various aspects of protobuf serialization and deserialization, ensuring the JSON output is consistent with your requirements.
+
 ## Performance
 
 ``` ini
