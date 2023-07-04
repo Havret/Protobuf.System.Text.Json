@@ -29,11 +29,14 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
 
         _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor =>
         {
+            var enumType = jsonProtobufSerializerOptions.UseStringProtoEnumValueNames && fieldDescriptor.FieldType == FieldType.Enum
+                ? fieldDescriptor.EnumType
+                : null;
             var fieldInfo = new FieldInfo
             {
                 Accessor = fieldDescriptor.Accessor,
                 IsRepeated = fieldDescriptor.IsRepeated,
-                EnumType = jsonProtobufSerializerOptions.UseStringProtoEnumValueNames ? fieldDescriptor.EnumType : null,
+                EnumType = enumType,
                 IsMap = fieldDescriptor.IsMap,
                 FieldType = FieldTypeResolver.ResolverFieldType(fieldDescriptor, propertyTypeLookup),
                 JsonName = convertNameFunc(fieldDescriptor),

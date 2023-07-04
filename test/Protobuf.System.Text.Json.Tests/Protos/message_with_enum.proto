@@ -4,6 +4,7 @@ option csharp_namespace = "System.Text.Json.Protobuf.Tests";
 
 message MessageWithEnum {
   TestEnum enum_field = 1;
+  int32 regular_field = 2;
 }
 
 enum TestEnum {
