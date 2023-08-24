@@ -1,3 +1,4 @@
+using Google.Protobuf;
 using Google.Protobuf.Reflection;
 using Google.Protobuf.WellKnownTypes;
 using Type = System.Type;
@@ -33,7 +34,7 @@ internal static class FieldTypeResolver
             case FieldType.String:
                 return typeof(string);
             case FieldType.Bytes:
-                return typeof(Google.Protobuf.ByteString);
+                return typeof(ByteString);
             case FieldType.Message when fieldDescriptor.MessageType.ClrType is { } clrType:
                 if (clrType == typeof(DoubleValue))
                     return typeof(double?);
