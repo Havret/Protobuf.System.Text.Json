@@ -58,7 +58,7 @@ internal static class FieldTypeResolver
                 return propertyTypeLookup[fieldDescriptor.PropertyName];
             default:
                 throw new ArgumentOutOfRangeException(nameof(fieldDescriptor),
-                    $"FieldType: '{fieldDescriptor}' is not supported.");
+                    $"FieldType: '{fieldDescriptor.FieldType}' is not supported.");
         }
     }
 }
