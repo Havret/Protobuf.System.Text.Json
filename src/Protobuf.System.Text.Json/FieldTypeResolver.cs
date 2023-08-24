@@ -32,6 +32,8 @@ internal static class FieldTypeResolver
                 return typeof(bool);
             case FieldType.String:
                 return typeof(string);
+            case FieldType.Bytes:
+                return typeof(Google.Protobuf.ByteString);
             case FieldType.Message when fieldDescriptor.MessageType.ClrType is { } clrType:
                 if (clrType == typeof(DoubleValue))
                     return typeof(double?);
