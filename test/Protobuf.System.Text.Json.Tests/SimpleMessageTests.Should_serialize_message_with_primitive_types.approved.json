@@ -12,5 +12,6 @@
   "sfixed32Property": 9,
   "sfixed64Property": 10,
   "boolProperty": true,
-  "stringProperty": "hello"
+  "stringProperty": "hello",
+  "bytesProperty": "YWJj"
 }

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
+using Google.Protobuf;
 using Protobuf.System.Text.Json.Tests.Utils;
 using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
@@ -28,9 +29,8 @@ public class SimpleMessageTests
             Sfixed32Property = 9,
             Sfixed64Property = 10,
             BoolProperty = true,
-            StringProperty = "hello"
-            // TODO: Support bytes property
-            // BytesProperty = ByteString.CopyFromUtf8("abc")
+            StringProperty = "hello",
+            BytesProperty = ByteString.CopyFromUtf8("abc")
         };
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
         
@@ -61,9 +61,8 @@ public class SimpleMessageTests
             Sfixed32Property = 9,
             Sfixed64Property = 10,
             BoolProperty = true,
-            StringProperty = "hello"
-            // TODO: Support bytes property
-            // BytesProperty = ByteString.CopyFromUtf8("abc")
+            StringProperty = "hello",
+            BytesProperty = ByteString.CopyFromUtf8("abc")
         };
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
 
