@@ -12,5 +12,6 @@
   "sfixed32property": 0,
   "sfixed64property": 0,
   "boolproperty": false,
-  "stringproperty": ""
+  "stringproperty": "",
+  "bytesproperty": ""
 }

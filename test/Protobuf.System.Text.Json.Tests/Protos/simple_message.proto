@@ -31,6 +31,5 @@ message SimpleMessage {
   
   string string_property = 14;
   
-  // TODO: Support bytes property
-  // bytes bytes_property = 15;
+  bytes bytes_property = 15;
 }
