@@ -23,6 +23,7 @@ public static class JsonSerializerOptionsExtensions
         {
             options.Converters.Add(new TimestampConverter());
         }
+        options.Converters.Add(new ByteStringConverter());
         options.Converters.Add(new ProtobufJsonConverterFactory(jsonProtobufSerializerOptions));
     }
     

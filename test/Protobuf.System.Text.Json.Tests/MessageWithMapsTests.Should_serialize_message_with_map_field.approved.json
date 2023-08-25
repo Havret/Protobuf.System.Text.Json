@@ -8,5 +8,8 @@
         "a": 1
       }
     }
+  },
+  "mapStringToBytesType": {
+    "string_key": "YWJj"
   }
 }
