@@ -5,6 +5,7 @@ option csharp_namespace = "System.Text.Json.Protobuf.Tests";
 message MessageWithMaps {
   map<int32, string> map_int_to_string = 1;
   map<string, NestedMessageAsKey> map_string_to_complex_type = 2;
+  map<string, bytes> map_string_to_bytes_type = 3;
 }
 
 message NestedMessageAsKey {

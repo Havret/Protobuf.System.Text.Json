@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
+using Google.Protobuf;
 using Protobuf.System.Text.Json.Tests.Utils;
 using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
@@ -22,7 +23,8 @@ public class MessageWithMapsTests
                 {
                     MapStringToInt = {["a"] = 1}
                 }
-            }
+            },
+            MapStringToBytesType = { ["string_key"] = ByteString.CopyFromUtf8("abc") }
         };
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
 
@@ -47,7 +49,8 @@ public class MessageWithMapsTests
                 {
                     MapStringToInt = {["a"] = 1}
                 }
-            }
+            },
+            MapStringToBytesType = { ["string_key"] = ByteString.CopyFromUtf8("abc") }
         };
         var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
 
