@@ -61,32 +61,33 @@ By customizing these options, you can control how the library handles various as
 ## Performance
 
 ``` ini
-BenchmarkDotNet=v0.13.1, OS=macOS Monterey 12.3 (21E230) [Darwin 21.4.0]
+BenchmarkDotNet v0.13.12, macOS Sonoma 14.5 (23F79) [Darwin 23.5.0]
 Apple M1 Pro, 1 CPU, 10 logical and 10 physical cores
-.NET SDK=6.0.101
-  [Host]     : .NET 6.0.1 (6.0.121.56705), Arm64 RyuJIT
-  DefaultJob : .NET 6.0.1 (6.0.121.56705), Arm64 RyuJIT
+.NET SDK 8.0.100
+  [Host]     : .NET 8.0.0 (8.0.23.53103), Arm64 RyuJIT AdvSIMD
+  DefaultJob : .NET 8.0.0 (8.0.23.53103), Arm64 RyuJIT AdvSIMD
 ```
 
 ### Simple message
-|                                       Method |      Mean |     Error |    StdDev |
-|--------------------------------------------- |----------:|----------:|----------:|
-|                SystemTextJsonProtobufSupport |  2.572 μs | 0.0094 μs | 0.0074 μs |
-| NewtonsoftJsonWithProtobufParserAndFormatter | 17.250 μs | 0.1492 μs | 0.1395 μs |
 
+| Method                                       | Mean     | Error     | StdDev    |
+|--------------------------------------------- |---------:|----------:|----------:|
+| SystemTextJsonProtobufSupport                | 1.562 us | 0.0080 us | 0.0074 us |
+| NewtonsoftJsonWithProtobufParserAndFormatter | 8.705 us | 0.0432 us | 0.0383 us |
 
 ### Message with oneofs
-|                                       Method |      Mean |     Error |    StdDev |
-|--------------------------------------------- |----------:|----------:|----------:|
-|                SystemTextJsonProtobufSupport |  3.115 μs | 0.0065 μs | 0.0057 μs |
-| NewtonsoftJsonWithProtobufParserAndFormatter | 18.384 μs | 0.0403 μs | 0.0377 μs |
 
+| Method                                       | Mean     | Error     | StdDev    |
+|--------------------------------------------- |---------:|----------:|----------:|
+| SystemTextJsonProtobufSupport                | 1.832 us | 0.0132 us | 0.0117 us |
+| NewtonsoftJsonWithProtobufParserAndFormatter | 9.962 us | 0.1668 us | 0.1561 us |
 
 ### Message with repeated fields
-|                                       Method |     Mean |   Error |  StdDev |
-|--------------------------------------------- |---------:|--------:|--------:|
-|                SystemTextJsonProtobufSupport | 100.9 μs | 0.19 μs | 0.17 μs |
-| NewtonsoftJsonWithProtobufParserAndFormatter | 735.1 μs | 1.09 μs | 1.02 μs |
+
+| Method                                       | Mean      | Error    | StdDev   |
+|--------------------------------------------- |----------:|---------:|---------:|
+| SystemTextJsonProtobufSupport                |  53.79 us | 0.262 us | 0.232 us |
+| NewtonsoftJsonWithProtobufParserAndFormatter | 340.94 us | 1.360 us | 1.205 us |
 
 ## License
 
