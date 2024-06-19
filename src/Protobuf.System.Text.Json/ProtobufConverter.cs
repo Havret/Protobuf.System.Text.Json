@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 using Google.Protobuf;
 using Google.Protobuf.Reflection;
 using Protobuf.System.Text.Json.InternalConverters;
-using Type = System.Type;
 
 namespace Protobuf.System.Text.Json;
 
