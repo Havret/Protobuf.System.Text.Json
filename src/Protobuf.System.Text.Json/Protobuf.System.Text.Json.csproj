@@ -3,8 +3,8 @@
     <PropertyGroup>
         <Summary>System.Text.Json extensions for Protobuf types.</Summary>
         <Description>System.Text.Json extensions for Protobuf types.</Description>
-        <TargetFrameworks>net6.0;net5.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
-        <LangVersion>10</LangVersion>
+        <TargetFrameworks>net8.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <LangVersion>12</LangVersion>
         <PackageProjectUrl>https://github.com/Havret/System.Text.Json.Protobuf</PackageProjectUrl>
         <PackageId>Protobuf.System.Text.Json</PackageId>
         <PackageLicenseUrl>https://github.com/Havret/System.Text.Json.Protobuf/blob/main/LICENSE</PackageLicenseUrl>
@@ -22,19 +22,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Google.Protobuf" Version="3.19.0" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-        <PackageReference Include="System.Text.Json" Version="5.0.0" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-        <PackageReference Include="System.Text.Json" Version="5.0.0" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1' ">
-        <PackageReference Include="System.Text.Json" Version="5.0.0" />
+        <PackageReference Include="Google.Protobuf" Version="3.27.1" />
+        <PackageReference Include="System.Text.Json" Version="8.0.3" />
     </ItemGroup>
 
 </Project>

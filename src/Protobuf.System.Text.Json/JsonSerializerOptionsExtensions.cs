@@ -4,6 +4,9 @@ using Protobuf.System.Text.Json.WellKnownTypesConverters;
 // ReSharper disable once CheckNamespace
 namespace System.Text.Json;
 
+/// <summary>
+/// Extension methods for <see cref="JsonSerializerOptions"/>.
+/// </summary>
 public static class JsonSerializerOptionsExtensions
 {
     /// <summary>
