@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using System.Threading.Tasks;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using Xunit;
 
 namespace Protobuf.System.Text.Json.Tests;
@@ -32,7 +29,8 @@ public class SchemaEvolutionTests
         var deserialized = JsonSerializer.Deserialize<SchemaEvolutionV1[]>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldHaveSingleItem();
+        Assert.NotNull(deserialized);
+        Assert.Single(deserialized);
     }
     
     [Fact]
@@ -54,7 +52,7 @@ public class SchemaEvolutionTests
         var deserialized = JsonSerializer.Deserialize<SchemaEvolutionV1[]>(memoryStream, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.Length.ShouldBe(schemaEvolutionV2.Count);
+        Assert.NotNull(deserialized);
+        Assert.Equal(schemaEvolutionV2.Count, deserialized.Length);
     }
 }

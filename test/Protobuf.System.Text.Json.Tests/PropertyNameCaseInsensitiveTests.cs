@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
-using Shouldly;
 using Xunit;
 
 namespace Protobuf.System.Text.Json.Tests;
@@ -30,6 +29,6 @@ public class PropertyNameCaseInsensitiveTests
         
         var deserialized = JsonSerializer.Deserialize<SimpleMessage>(payload, deserializerOptions);
         
-        deserialized.ShouldBeEquivalentTo(originalMessage);
+        Assert.Equal(originalMessage, deserialized);
     }
 }

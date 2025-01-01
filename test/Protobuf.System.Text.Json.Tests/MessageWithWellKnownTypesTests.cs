@@ -2,7 +2,6 @@ using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using System.Text.Json.Serialization;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -74,7 +73,8 @@ public class MessageWithWellKnownTypesTests
 
 
         // Assert
-        deserialized.ShouldBe(msg);
+        Assert.Equal(msg, deserialized);
+
     }
 
     [Fact]
@@ -89,6 +89,6 @@ public class MessageWithWellKnownTypesTests
         var deserialized = JsonSerializer.Deserialize<MessageWithWellKnownTypes>(serialized, jsonSerializerOptions);
         
         // Assert
-        deserialized.ShouldBe(msg);
+        Assert.Equal(msg, deserialized);
     }
 }

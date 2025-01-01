@@ -2,7 +2,6 @@ using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using Google.Protobuf.WellKnownTypes;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -60,8 +59,8 @@ public class MessageWithDurationTests
         var deserialized = JsonSerializer.Deserialize<MessageWithDuration>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
 
     [Fact]
@@ -76,8 +75,8 @@ public class MessageWithDurationTests
         var deserialized = JsonSerializer.Deserialize<MessageWithDuration>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
 
     [Fact]
@@ -125,8 +124,7 @@ public class MessageWithDurationTests
         var deserialized = JsonSerializer.Deserialize<MessageWithDuration>(payload, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
-
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
 }

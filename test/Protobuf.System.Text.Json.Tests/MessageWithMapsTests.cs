@@ -2,7 +2,6 @@ using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using Google.Protobuf;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -59,7 +58,7 @@ public class MessageWithMapsTests
         var deserialized = JsonSerializer.Deserialize<MessageWithMaps>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
 }
