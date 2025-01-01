@@ -2,7 +2,6 @@ using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using Google.Protobuf;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -71,8 +70,8 @@ public class SimpleMessageTests
         var deserialized = JsonSerializer.Deserialize<SimpleMessage>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.Int32Property.ShouldBe(msg.Int32Property);
-        deserialized.Int64Property.ShouldBe(msg.Int64Property);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.Int32Property, deserialized.Int32Property);
+        Assert.Equal(msg.Int64Property, deserialized.Int64Property);
     }
 }

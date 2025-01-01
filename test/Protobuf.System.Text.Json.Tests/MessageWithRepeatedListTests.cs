@@ -1,7 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -62,11 +61,10 @@ public class MessageWithRepeatedListTests
         var deserialized = JsonSerializer.Deserialize<MessageWithRepeatedList>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-
-        deserialized.Int32List.ShouldBe(msg.Int32List);
-        deserialized.Int64List.ShouldBe(msg.Int64List);
-        deserialized.EnumList.ShouldBe(msg.EnumList);
-        deserialized.NestedMessageList.ShouldBe(msg.NestedMessageList);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.Int32List, deserialized.Int32List);
+        Assert.Equal(msg.Int64List, deserialized.Int64List);
+        Assert.Equal(msg.EnumList, deserialized.EnumList);
+        Assert.Equal(msg.NestedMessageList, deserialized.NestedMessageList);
     }
 }

@@ -1,7 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -58,10 +57,10 @@ public class MessageWithOneOfTests
         var deserialized = JsonSerializer.Deserialize<MessageWithOneOf>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.Int32PropertyValue.ShouldBe(msg.Int32PropertyValue);
-        deserialized.Int64PropertyValue.ShouldBe(msg.Int64PropertyValue);
-        deserialized.PropertyCase.ShouldBe(msg.PropertyCase);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.Int32PropertyValue, deserialized.Int32PropertyValue);
+        Assert.Equal(msg.Int64PropertyValue, deserialized.Int64PropertyValue);
+        Assert.Equal(msg.PropertyCase, deserialized.PropertyCase);
     }
     
     [Fact]
@@ -76,10 +75,11 @@ public class MessageWithOneOfTests
         var deserialized = JsonSerializer.Deserialize<MessageWithOneOf>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.Int32PropertyValue.ShouldBe(msg.Int32PropertyValue);
-        deserialized.Int64PropertyValue.ShouldBe(msg.Int64PropertyValue);
-        deserialized.PropertyCase.ShouldBe(msg.PropertyCase);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.Int32PropertyValue, deserialized.Int32PropertyValue);
+        Assert.Equal(msg.Int64PropertyValue, deserialized.Int64PropertyValue);
+        Assert.Equal(msg.PropertyCase, deserialized.PropertyCase);
+
     }
     
     [Fact]
@@ -132,9 +132,9 @@ public class MessageWithOneOfTests
         var deserialized = JsonSerializer.Deserialize<MessageWithOptionalProperty>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.Int32Property.ShouldBe(msg.Int32Property);
-        deserialized.HasInt32Property.ShouldBe(msg.HasInt32Property);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.Int32Property, deserialized.Int32Property);
+        Assert.Equal(msg.HasInt32Property, deserialized.HasInt32Property);
     }
     
     [Fact]
@@ -149,8 +149,8 @@ public class MessageWithOneOfTests
         var deserialized = JsonSerializer.Deserialize<MessageWithOptionalProperty>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.Int32Property.ShouldBe(msg.Int32Property);
-        deserialized.HasInt32Property.ShouldBe(msg.HasInt32Property);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.Int32Property, deserialized.Int32Property);
+        Assert.Equal(msg.HasInt32Property, deserialized.HasInt32Property);
     }
 }

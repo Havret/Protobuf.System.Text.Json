@@ -2,7 +2,6 @@ using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using System.Text.Json.Serialization;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -51,7 +50,7 @@ public class MessageWithComplexPropertyTests
         var deserialized = JsonSerializer.Deserialize<MessageWithComplexProperty>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.Equal(msg, deserialized);
     }
     
     [Fact]
@@ -74,6 +73,6 @@ public class MessageWithComplexPropertyTests
         var deserialized = JsonSerializer.Deserialize<MessageWithComplexProperty>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.Equal(msg, deserialized);
     }
 }

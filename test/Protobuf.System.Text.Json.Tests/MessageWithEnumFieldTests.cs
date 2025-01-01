@@ -1,7 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -42,8 +41,8 @@ public class MessageWithEnumFieldTests
         var deserialized = JsonSerializer.Deserialize<MessageWithEnum>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
 
     [Fact]
@@ -106,8 +105,8 @@ public class MessageWithEnumFieldTests
         var deserialized = JsonSerializer.Deserialize<MessageWithEnum>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
     
     [Fact]
@@ -127,6 +126,6 @@ public class MessageWithEnumFieldTests
 
         // Act & Assert
         var exception = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<MessageWithEnum>(invalidPayload, jsonSerializerOptions));
-        exception.Message.ShouldContain("'INVALID_OPTION' is not a valid value for type System.Text.Json.Protobuf.Tests.TestEnum.");
+        Assert.Contains("'INVALID_OPTION' is not a valid value for type System.Text.Json.Protobuf.Tests.TestEnum.", exception.Message);
     }
 }

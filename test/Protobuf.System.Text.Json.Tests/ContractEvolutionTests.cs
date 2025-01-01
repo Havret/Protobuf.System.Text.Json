@@ -1,7 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using Xunit;
 
 namespace Protobuf.System.Text.Json.Tests;
@@ -25,8 +24,8 @@ public class ContractEvolutionTests
         var deserialized = JsonSerializer.Deserialize<MessageWithVersionMismatch>(payload, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.DoubleProperty.ShouldBe(msg.DoubleProperty);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.DoubleProperty, deserialized.DoubleProperty);
     }
     
     [Fact]
@@ -44,7 +43,7 @@ public class ContractEvolutionTests
         var deserialized = JsonSerializer.Deserialize<MessageWithVersionMismatchV2>(payload, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.DoubleProperty.ShouldBe(msg.DoubleProperty);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg.DoubleProperty, deserialized.DoubleProperty);
     }
 }

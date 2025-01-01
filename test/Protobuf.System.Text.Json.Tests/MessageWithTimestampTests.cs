@@ -4,7 +4,6 @@ using System.Text.Json.Protobuf.Tests;
 using System.Text.Json.Serialization;
 using Google.Protobuf.WellKnownTypes;
 using Protobuf.System.Text.Json.Tests.Utils;
-using Shouldly;
 using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
@@ -62,8 +61,8 @@ public class MessageWithTimestampTests
         var deserialized = JsonSerializer.Deserialize<MessageWithTimestamp>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(msg, deserialized);
     }
     
     [Fact]
@@ -78,8 +77,8 @@ public class MessageWithTimestampTests
         var deserialized = JsonSerializer.Deserialize<MessageWithTimestamp>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
     
     [Fact]
@@ -95,7 +94,7 @@ public class MessageWithTimestampTests
         var deserialized = JsonSerializer.Deserialize<MessageWithTimestamp>(serialized, jsonSerializerOptions);
 
         // Assert
-        deserialized.ShouldNotBeNull();
-        deserialized.ShouldBeEquivalentTo(msg);
+        Assert.NotNull(deserialized);
+        Assert.Equal(deserialized, msg);
     }
 }
