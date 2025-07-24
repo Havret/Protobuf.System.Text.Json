@@ -21,6 +21,8 @@
     <ItemGroup>
         <Protobuf Include="**/*.proto" />
     </ItemGroup>
+    
+<!--    test-->
 
     <ItemGroup>
         <ProjectReference Include="..\Protobuf.System.Text.Json.Benchmark.Shared\Protobuf.System.Text.Json.Benchmark.Shared.csproj" />
