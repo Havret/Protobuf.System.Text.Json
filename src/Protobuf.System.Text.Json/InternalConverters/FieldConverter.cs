@@ -19,6 +19,11 @@ internal class FieldConverter<T> : InternalConverter
         IFieldAccessor fieldAccessor)
     {
         _converter ??= GetConverter(ref options);
+        if (reader.TokenType == JsonTokenType.Null && !_converter.HandleNull)
+        {
+            return;
+        }
+        
         var read = _converter.Read(ref reader, typeToConvert, options);
         if (read is { } value)
         {
