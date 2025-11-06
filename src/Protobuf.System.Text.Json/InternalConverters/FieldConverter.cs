@@ -1,3 +1,5 @@
+using System.Buffers;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Google.Protobuf;
@@ -8,6 +10,15 @@ namespace Protobuf.System.Text.Json.InternalConverters;
 internal class FieldConverter<T> : InternalConverter
 {
     private JsonConverter<T>? _converter;
+    private readonly bool _isConverterForNumberType;
+    
+    public FieldConverter()
+    {
+        var type = typeof(T);
+        type = Nullable.GetUnderlyingType(type) ?? type;
+        var typeCode = Type.GetTypeCode(type);
+        _isConverterForNumberType = typeCode is >= TypeCode.SByte and <= TypeCode.Decimal;
+    }
 
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
@@ -23,14 +34,22 @@ internal class FieldConverter<T> : InternalConverter
         {
             return;
         }
-        
-        var read = _converter.Read(ref reader, typeToConvert, options);
-        if (read is { } value)
+
+        if (_isConverterForNumberType && reader.TokenType == JsonTokenType.String && (JsonNumberHandling.AllowReadingFromString & options.NumberHandling) != 0)
         {
+            var value = Convert.ChangeType(reader.GetString(), typeToConvert);
             fieldAccessor.SetValue(obj, value);
         }
+        else
+        {
+            var read = _converter.Read(ref reader, typeToConvert, options);
+            if (read is { } value)
+            {
+                fieldAccessor.SetValue(obj, value);
+            }
+        }
     }
-    
+
     private static JsonConverter<T> GetConverter(ref JsonSerializerOptions options)
     {
         var converter = options.GetConverter(typeof(T));
