@@ -74,4 +74,48 @@ public class SimpleMessageTests
         Assert.Equal(msg.Int32Property, deserialized.Int32Property);
         Assert.Equal(msg.Int64Property, deserialized.Int64Property);
     }
+
+    [Fact]
+    public void Should_deserialize_message_with_primitive_types_when_values_were_explicitly_set_to_nulls()
+    {
+        // Arrange
+        var serialized =
+            """
+            {
+              "doubleProperty" : null,
+              "floatProperty" : null,
+              "int32Property" : null,
+              "int64Property" : null,
+              "uint32Property" : null,
+              "uint64Property" : null,
+              "sint32Property" : null,
+              "sint64Property" : null,
+              "fixed32Property" : null,
+              "fixed64Property" : null,
+              "sfixed32Property" : null,
+              "sfixed64Property" : null,
+              "boolProperty" : null
+            }
+            """;
+        var jsonSerializerOptions = TestHelper.CreateJsonSerializerOptions();
+
+        // Act
+        var deserialized = JsonSerializer.Deserialize<SimpleMessage>(serialized, jsonSerializerOptions);
+
+        // Assert
+        Assert.NotNull(deserialized);
+        Assert.Equal(0d, deserialized.DoubleProperty);
+        Assert.Equal(0f, deserialized.FloatProperty);
+        Assert.Equal(0, deserialized.Int32Property);
+        Assert.Equal(0L, deserialized.Int64Property);
+        Assert.Equal(0u, deserialized.Uint32Property);
+        Assert.Equal(0ul, deserialized.Uint64Property);
+        Assert.Equal(0, deserialized.Sint32Property);
+        Assert.Equal(0L, deserialized.Sint64Property);
+        Assert.Equal(0u, deserialized.Fixed32Property);
+        Assert.Equal(0ul, deserialized.Fixed64Property);
+        Assert.Equal(0, deserialized.Sfixed32Property);
+        Assert.Equal(0L, deserialized.Sfixed64Property);
+        Assert.False(deserialized.BoolProperty);
+    } 
 }
