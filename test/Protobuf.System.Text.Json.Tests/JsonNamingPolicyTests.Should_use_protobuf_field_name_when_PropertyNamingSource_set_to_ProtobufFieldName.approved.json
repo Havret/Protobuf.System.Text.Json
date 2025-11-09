@@ -1,0 +1,17 @@
+﻿{
+  "double_property": 2.5,
+  "float_property": 0,
+  "int_32_property": 0,
+  "int_64_property": 0,
+  "uint_32_property": 0,
+  "uint_64_property": 0,
+  "sint_32_property": 0,
+  "sint_64_property": 0,
+  "fixed_32_property": 0,
+  "fixed_64_property": 0,
+  "sfixed_32_property": 0,
+  "sfixed_64_property": 0,
+  "bool_property": false,
+  "string_property": "",
+  "bytes_property": ""
+}

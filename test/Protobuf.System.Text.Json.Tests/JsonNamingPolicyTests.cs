@@ -65,7 +65,8 @@ public class JsonNamingPolicyTests
         var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
 
         // Assert
-        Assert.Contains("\"doubleProperty\"", serialized);
+        var approver = new ExplicitApprover();
+        approver.VerifyJson(serialized);
     }
 
     [Fact]
@@ -84,7 +85,8 @@ public class JsonNamingPolicyTests
         var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
 
         // Assert
-        Assert.Contains("\"double_property\"", serialized);
+        var approver = new ExplicitApprover();
+        approver.VerifyJson(serialized);
     }
 
     [Fact]

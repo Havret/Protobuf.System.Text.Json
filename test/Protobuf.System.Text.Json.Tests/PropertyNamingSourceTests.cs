@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Protobuf.Tests;
+using SmartAnalyzers.ApprovalTestsExtensions;
 using Xunit;
 
 namespace Protobuf.System.Text.Json.Tests;
@@ -22,10 +23,8 @@ public class PropertyNamingSourceTests
         var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
 
         // Assert
-        // double_property has json_name = "customDoubleProperty"
-        Assert.Contains("\"customDoubleProperty\"", serialized);
-        // string_property doesn't have json_name, so it should be camelCased to "stringProperty"
-        Assert.Contains("\"stringProperty\"", serialized);
+        var approver = new ExplicitApprover();
+        approver.VerifyJson(serialized);
     }
 
     [Fact]
@@ -44,11 +43,8 @@ public class PropertyNamingSourceTests
         var serialized = JsonSerializer.Serialize(msg, jsonSerializerOptions);
 
         // Assert
-        // Both fields should use their original proto field names
-        Assert.Contains("\"double_property\"", serialized);
-        Assert.Contains("\"string_property\"", serialized);
-        // Should NOT use the custom json_name
-        Assert.DoesNotContain("\"customDoubleProperty\"", serialized);
+        var approver = new ExplicitApprover();
+        approver.VerifyJson(serialized);
     }
 
     [Fact]
