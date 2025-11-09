@@ -24,7 +24,7 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         var propertyInfo = type.GetProperty("Descriptor", BindingFlags.Public | BindingFlags.Static);
         var messageDescriptor = (MessageDescriptor) propertyInfo?.GetValue(null, null)!;
         
-        var convertNameFunc = GetConvertNameFunc(jsonSerializerOptions.PropertyNamingPolicy, jsonProtobufSerializerOptions.UseProtobufJsonNames);
+        var convertNameFunc = GetConvertNameFunc(jsonSerializerOptions.PropertyNamingPolicy, jsonProtobufSerializerOptions.PropertyNamingSource);
 
         _fields = messageDescriptor.Fields.InDeclarationOrder().Select(fieldDescriptor =>
         {
@@ -49,19 +49,24 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         _fieldsLookup = _fields.ToDictionary(x => x.JsonName, x => x, stringComparer);
     }
 
-    private static Func<FieldDescriptor, string> GetConvertNameFunc(JsonNamingPolicy? jsonNamingPolicy, bool useProtobufJsonNames)
+    private static Func<FieldDescriptor, string> GetConvertNameFunc(JsonNamingPolicy? jsonNamingPolicy, PropertyNamingSource propertyNamingSource)
     {
-        if (useProtobufJsonNames)
+        switch (propertyNamingSource)
         {
-            return descriptor => descriptor.JsonName;
+            case PropertyNamingSource.ProtobufJsonName:
+                return descriptor => descriptor.JsonName;
+            
+            case PropertyNamingSource.ProtobufFieldName:
+                return descriptor => descriptor.Name;
+            
+            case PropertyNamingSource.Default:
+            default:
+                if (jsonNamingPolicy != null)
+                {
+                    return descriptor => jsonNamingPolicy.ConvertName(descriptor.PropertyName);
+                }
+                return descriptor => descriptor.PropertyName;
         }
-
-        if (jsonNamingPolicy != null)
-        {
-            return descriptor => jsonNamingPolicy.ConvertName(descriptor.PropertyName);
-        }
-
-        return descriptor => descriptor.PropertyName;
     }
 
     public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

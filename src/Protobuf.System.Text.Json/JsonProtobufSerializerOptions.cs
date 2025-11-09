@@ -12,7 +12,18 @@ public class JsonProtobufSerializerOptions
     /// option in the .proto file.
     /// The default value is false.
     /// </summary>
-    public bool UseProtobufJsonNames { get; set; }
+    [Obsolete("Use PropertyNamingSource instead. This property will be removed in a future version.")]
+    public bool UseProtobufJsonNames
+    {
+        get => PropertyNamingSource == PropertyNamingSource.ProtobufJsonName;
+        set => PropertyNamingSource = value ? PropertyNamingSource.ProtobufJsonName : PropertyNamingSource.Default;
+    }
+
+    /// <summary>
+    /// Specifies the source for property names in JSON serialization.
+    /// The default value is <see cref="PropertyNamingSource.Default"/>.
+    /// </summary>
+    public PropertyNamingSource PropertyNamingSource { get; set; } = PropertyNamingSource.Default;
 
     /// <summary>
     /// Controls how <see cref="Google.Protobuf.WellKnownTypes.Duration"/> fields are handled.
