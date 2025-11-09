@@ -44,7 +44,26 @@ var deserialized = JsonSerializer.Deserialize<SimpleMessage>(payload, jsonSerial
 ## Configuration
 The library offers several configuration options to fine-tune protobuf serialization. You can modify the default settings using a delegate passed to the AddProtobufSupport method. The available options are described below:
 
-### UseProtobufJsonNames
+### PropertyNamingSource
+This option specifies the source for property names in JSON serialization. The default value is `PropertyNamingSource.Default`.
+
+Available values:
+- `PropertyNamingSource.Default`: Use the default `PropertyNamingPolicy` from `JsonSerializerOptions`.
+- `PropertyNamingSource.ProtobufJsonName`: Use the JsonName from the protobuf contract. This is usually the lower-camel-cased form of the field name, but can be overridden using the `json_name` option in the .proto file.
+- `PropertyNamingSource.ProtobufFieldName`: Use the original field name as defined in the .proto file (e.g., "double_property" instead of "doubleProperty").
+
+Example:
+```csharp
+var jsonSerializerOptions = new JsonSerializerOptions();
+jsonSerializerOptions.AddProtobufSupport(options => 
+{
+    options.PropertyNamingSource = PropertyNamingSource.ProtobufFieldName;
+});
+```
+
+### UseProtobufJsonNames (Obsolete)
+**Note:** This property is obsolete and will be removed in a future version. Use `PropertyNamingSource` instead.
+
 This option defines how property names should be resolved for protobuf contracts. When set to `true`, the `PropertyNamingPolicy` will be ignored, and property names will be derived from the protobuf contract. The default value is `false`.
 
 ### TreatDurationAsTimeSpan
