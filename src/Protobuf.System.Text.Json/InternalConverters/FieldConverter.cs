@@ -11,6 +11,7 @@ internal class FieldConverter<T> : InternalConverter
 {
     private JsonConverter<T>? _converter;
     private readonly bool _isConverterForNumberType;
+    private readonly bool _isConverterForFloatingPointType;
     
     public FieldConverter()
     {
@@ -18,12 +19,21 @@ internal class FieldConverter<T> : InternalConverter
         type = Nullable.GetUnderlyingType(type) ?? type;
         var typeCode = Type.GetTypeCode(type);
         _isConverterForNumberType = typeCode is >= TypeCode.SByte and <= TypeCode.Decimal;
+        _isConverterForFloatingPointType = typeCode is TypeCode.Single or TypeCode.Double;
     }
 
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
         _converter ??= GetConverter(ref options);
-        _converter.Write(writer, (T) value, options);
+        
+        if (_isConverterForNumberType && (JsonNumberHandling.WriteAsString & options.NumberHandling) != 0)
+        {
+            writer.WriteStringValue(value.ToString());
+        }
+        else
+        {
+            _converter.Write(writer, (T) value, options);
+        }
     }
 
     public override void Read(ref Utf8JsonReader reader, IMessage obj, Type typeToConvert, JsonSerializerOptions options,
@@ -37,8 +47,33 @@ internal class FieldConverter<T> : InternalConverter
 
         if (_isConverterForNumberType && reader.TokenType == JsonTokenType.String && (JsonNumberHandling.AllowReadingFromString & options.NumberHandling) != 0)
         {
-            var value = Convert.ChangeType(reader.GetString(), typeToConvert);
-            fieldAccessor.SetValue(obj, value);
+            var stringValue = reader.GetString();
+            
+            // Check if it's a named floating-point literal
+            if (_isConverterForFloatingPointType && (stringValue == "NaN" || stringValue == "Infinity" || stringValue == "-Infinity"))
+            {
+                // Only allow these if the flag is set
+                if ((JsonNumberHandling.AllowNamedFloatingPointLiterals & options.NumberHandling) != 0)
+                {
+                    var value = Convert.ChangeType(stringValue switch
+                    {
+                        "NaN" => typeToConvert == typeof(float) ? float.NaN : double.NaN,
+                        "Infinity" => typeToConvert == typeof(float) ? float.PositiveInfinity : double.PositiveInfinity,
+                        "-Infinity" => typeToConvert == typeof(float) ? float.NegativeInfinity : double.NegativeInfinity,
+                        _ => throw new JsonException($"Unexpected floating-point literal: {stringValue}")
+                    }, typeToConvert);
+                    fieldAccessor.SetValue(obj, value);
+                    return;
+                }
+                else
+                {
+                    // Flag not set, so this should fail
+                    throw new JsonException($"The string '{stringValue}' cannot be converted to a number without JsonNumberHandling.AllowNamedFloatingPointLiterals.");
+                }
+            }
+            
+            var convertedValue = Convert.ChangeType(stringValue, typeToConvert);
+            fieldAccessor.SetValue(obj, convertedValue);
         }
         else
         {
