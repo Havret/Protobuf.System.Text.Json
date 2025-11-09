@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "System.Text.Json.Protobuf.Tests";
+
+message MessageWithCustomJsonName {
+  double double_property = 1 [json_name = "customDoubleProperty"];
+
+  string string_property = 2;
+}
