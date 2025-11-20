@@ -13,7 +13,7 @@ message SimpleMessage {
 
   uint32 uint_32_property = 5;
 
-  uint32 uint_64_property = 6;
+  uint64 uint_64_property = 6;
 
   sint32 sint_32_property = 7;
 
