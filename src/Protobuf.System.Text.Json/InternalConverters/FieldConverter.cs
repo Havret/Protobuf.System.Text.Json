@@ -1,5 +1,6 @@
 using System.Buffers;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Google.Protobuf;
@@ -37,7 +38,7 @@ internal class FieldConverter<T> : InternalConverter
 
         if (_isConverterForNumberType && reader.TokenType == JsonTokenType.String && (JsonNumberHandling.AllowReadingFromString & options.NumberHandling) != 0)
         {
-            var value = Convert.ChangeType(reader.GetString(), typeToConvert);
+            var value = Convert.ChangeType(reader.GetString(), typeToConvert, CultureInfo.InvariantCulture);
             fieldAccessor.SetValue(obj, value);
         }
         else
